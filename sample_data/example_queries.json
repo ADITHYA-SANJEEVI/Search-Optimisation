@@ -1,0 +1,44 @@
+[
+  {
+    "query": "breastfeeding basics",
+    "expected_group_id": "grp-breastfeeding-basics"
+  },
+  {
+    "query": "breast feeding basics",
+    "expected_group_id": "grp-breastfeeding-basics"
+  },
+  {
+    "query": "breastfeedingbasics",
+    "expected_group_id": "grp-breastfeeding-basics"
+  },
+  {
+    "query": "brestfeading basics",
+    "expected_group_id": "grp-breastfeeding-basics"
+  },
+  {
+    "query": "new born care",
+    "expected_group_id": "grp-newborn-care"
+  },
+  {
+    "query": "newborncare",
+    "expected_group_id": "grp-newborn-care"
+  },
+  {
+    "query": "post partum deprssion",
+    "expected_group_id": "grp-postpartum-mental-health"
+  },
+  {
+    "query": "i need to learn about breastfeeding in tamil",
+    "expected_language": "tamil",
+    "expected_group_id": "grp-breastfeeding-basics"
+  },
+  {
+    "query": "beginner lactation course in tamil",
+    "expected_language": "tamil",
+    "expected_group_id": "grp-breastfeeding-basics"
+  },
+  {
+    "query": "kulanthai paramarippu",
+    "expected_group_id": "grp-newborn-care"
+  }
+]

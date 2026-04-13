@@ -1,0 +1,32 @@
+.env
+.venv/
+__pycache__/
+*.py[cod]
+*.pyo
+*.pyd
+*.egg-info/
+.pytest_cache/
+.mypy_cache/
+.ruff_cache/
+
+# Local caches and model downloads
+.cache/
+.sixth/
+
+# Local runtime data
+data/*.db
+artifacts/test_tmp/
+artifacts/*.log
+
+# Temporary test/work directories
+.pytest_tmp/
+pytest_tmp/
+manual_pytest_tmp/
+manual_pytest_tmp_run*/
+pytest-cache-files-*/
+
+# OS/editor noise
+.DS_Store
+Thumbs.db
+*.tmp
+*.temp

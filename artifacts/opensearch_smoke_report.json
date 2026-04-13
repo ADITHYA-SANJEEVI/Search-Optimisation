@@ -1,0 +1,21 @@
+{
+  "backend": "OpenSearchBackedSearchBackend",
+  "backend_health": {
+    "status": "yellow",
+    "cluster_name": "docker-cluster"
+  },
+  "initial_document_count": 35,
+  "post_update_document_count": 36,
+  "post_delete_document_count": 35,
+  "search_top_group_id": "postpartum-hemorrhage",
+  "suggest_sections": [
+    "course_titles",
+    "topics",
+    "instructors",
+    "related_queries",
+    "language_aware"
+  ],
+  "api_search_status_code": 200,
+  "api_suggest_status_code": 200,
+  "index_exists": true
+}

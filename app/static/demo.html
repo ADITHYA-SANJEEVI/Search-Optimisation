@@ -1,0 +1,304 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Aastrika Sphere Search</title>
+  <style>
+    :root{--bg:#f7f1e7;--panel:#fffdfa;--line:#dccab8;--text:#201913;--muted:#6f6255;--accent:#0b6e4f;--accent-soft:#e0f1ea;--shadow:0 18px 40px rgba(54,38,22,.08)}
+    *{box-sizing:border-box}body{margin:0;font-family:"Segoe UI","Trebuchet MS",sans-serif;color:var(--text);background:radial-gradient(circle at top right,rgba(11,110,79,.12),transparent 30%),linear-gradient(180deg,#fbf7f1,#efe3d2)}button,input,select{font:inherit}
+    h1,h2,h3,p{margin:0}.page{width:min(1180px,calc(100% - 28px));margin:22px auto 40px}.panel,.card,.modal-box{background:rgba(255,253,250,.96);border:1px solid var(--line);border-radius:22px;box-shadow:var(--shadow)}.panel{padding:22px}
+    .row,.chips,.head,.meta,.actions,.layout{display:flex;gap:12px;flex-wrap:wrap;align-items:center}.head{justify-content:space-between}.layout{align-items:flex-start;margin-top:18px}.sidebar{width:280px;display:grid;gap:16px}.main{flex:1 1 700px;display:grid;gap:16px}
+    .subtle,.muted{color:var(--muted)}.tiny{font-size:.92rem}.mt{margin-top:12px}.hidden{display:none}
+    input[type=text],select{width:100%;min-height:48px;border:1px solid var(--line);border-radius:16px;padding:0 14px;background:#fff;color:var(--text)}button{min-height:48px;border:1px solid transparent;border-radius:16px;padding:0 16px;background:#f0e6d8;color:var(--text);cursor:pointer}button:hover{transform:translateY(-1px)}button:focus,input:focus,select:focus{outline:2px solid rgba(11,110,79,.18);outline-offset:2px}
+    .primary{background:linear-gradient(135deg,var(--accent),#14885f);color:#fff}.secondary,.ghost{background:#fff;border-color:var(--line)}.chip,.tag{display:inline-flex;align-items:center;padding:7px 11px;border-radius:999px;border:1px solid var(--line);background:#fff}.chip.good{background:var(--accent-soft);border-color:#b9ddcf;color:#084837}
+    .search-shell{position:relative}.grow{flex:1 1 560px;min-width:260px}.suggestions{position:absolute;left:0;right:0;top:calc(100% + 8px);z-index:10;background:#fff;border:1px solid var(--line);border-radius:18px;overflow:hidden;box-shadow:0 18px 36px rgba(54,38,22,.16)}.sg{padding:10px 12px;border-top:1px solid rgba(111,98,85,.08)}.sg:first-child{border-top:0}.sg h3{font-size:.78rem;text-transform:uppercase;letter-spacing:.08em;color:var(--muted);margin-bottom:6px}.si{width:100%;display:flex;justify-content:space-between;align-items:center;background:transparent;border:0;border-radius:12px;padding:10px 12px;text-align:left}.si:hover,.si.active{background:rgba(11,110,79,.08)}
+    .filter-grid{display:grid;gap:12px}.results{display:grid;gap:14px}.card{padding:18px}.notice{padding:16px}.meta,.actions{margin-top:12px}.result-title{display:flex;justify-content:space-between;gap:12px;align-items:flex-start}.hint{color:#0b6e4f;font-weight:600}.facets{display:flex;gap:8px;flex-wrap:wrap}
+    .modal{position:fixed;inset:0;background:rgba(31,22,16,.36);display:flex;align-items:center;justify-content:center;padding:20px}.modal.hidden{display:none}.modal-box{width:min(620px,100%);padding:22px}.link-btn{padding:0;background:transparent;border:0;color:var(--accent);min-height:auto}
+    @media (max-width:960px){.layout{display:grid}.sidebar{width:auto}}
+  </style>
+</head>
+<body>
+  <div class="page">
+    <section class="panel">
+      <div class="head">
+        <div>
+          <h1>Find the right course for every learning goal</h1>
+          <p class="subtle mt">Search courses, topics, skills, or instructors across Aastrika’s healthcare learning catalog.</p>
+        </div>
+        <span id="voiceState" class="chip good">Voice ready</span>
+      </div>
+      <div class="search-shell mt">
+        <div class="row">
+          <input id="query" class="grow" type="text" autocomplete="off" placeholder="Search courses, topics, skills, or instructors">
+          <button id="searchBtn" class="primary" type="button">Search</button>
+          <button id="micBtn" class="secondary" type="button">Voice</button>
+          <button id="uploadBtn" class="ghost" type="button">Upload audio</button>
+          <input id="audioInput" class="hidden" type="file" accept="audio/*">
+        </div>
+        <div id="suggestions" class="suggestions hidden"></div>
+      </div>
+      <div class="chips mt">
+        <button class="ghost sample" type="button" data-query="postpartum hemorrhage management">PPH management</button>
+        <button class="ghost sample" type="button" data-query="newborn danger signs">Newborn danger signs</button>
+        <button class="ghost sample" type="button" data-query="lactation counselling">Lactation counselling</button>
+        <button class="ghost sample" type="button" data-query="hindi kmc course">Hindi KMC</button>
+      </div>
+    </section>
+
+    <section class="layout">
+      <aside class="sidebar">
+        <section class="panel">
+          <div class="head"><h2>Filters</h2><button id="clearFilters" class="link-btn" type="button">Clear all</button></div>
+          <div class="filter-grid mt">
+            <div>
+              <label for="language" class="tiny muted">Language</label>
+              <select id="language"><option value="">Any language</option><option value="English">English</option><option value="Hindi">Hindi</option><option value="Tamil">Tamil</option><option value="Kannada">Kannada</option><option value="Telugu">Telugu</option></select>
+            </div>
+            <div>
+              <label for="difficulty" class="tiny muted">Level</label>
+              <select id="difficulty"><option value="">Any level</option><option value="beginner">Beginner</option><option value="intermediate">Intermediate</option><option value="advanced">Advanced</option></select>
+            </div>
+            <div>
+              <label for="category" class="tiny muted">Category</label>
+              <select id="category"><option value="">Any category</option><option value="Pregnancy">Pregnancy</option><option value="Newborn Care">Newborn Care</option><option value="Maternal and Newborn Monitoring">Maternal and Newborn Monitoring</option><option value="Counselling">Counselling</option><option value="Emergency Care">Emergency Care</option></select>
+            </div>
+            <div>
+              <label for="duration" class="tiny muted">Duration</label>
+              <select id="duration"><option value="">Any duration</option><option value="15">Up to 15 min</option><option value="45">Up to 45 min</option><option value="90">Up to 90 min</option><option value="180">Up to 3 hours</option></select>
+            </div>
+            <div>
+              <label for="sort" class="tiny muted">Sort</label>
+              <select id="sort"><option value="relevance">Relevance</option><option value="recommended">Recommended</option><option value="alphabetical">Alphabetical</option><option value="popularity">Popularity</option><option value="newest">Newest</option></select>
+            </div>
+          </div>
+        </section>
+        <section class="panel">
+          <h2>Popular topics</h2>
+          <div class="chips mt">
+            <button class="tag topicChip" type="button" data-query="PPH">PPH</button>
+            <button class="tag topicChip" type="button" data-query="KMC">KMC</button>
+            <button class="tag topicChip" type="button" data-query="lactation">Lactation</button>
+            <button class="tag topicChip" type="button" data-query="high risk pregnancy">High-risk pregnancy</button>
+          </div>
+        </section>
+      </aside>
+
+      <main class="main">
+        <section class="panel">
+          <div class="head"><h2>Results</h2><span id="summary" class="muted tiny">Start with a search.</span></div>
+          <div id="activeFilters" class="chips mt hidden"></div>
+          <div id="message" class="card notice mt hidden"></div>
+          <div id="related" class="card notice mt hidden"></div>
+          <div id="results" class="results mt"></div>
+        </section>
+        <section id="facetPanel" class="panel hidden">
+          <div class="head"><h2>Explore related areas</h2><span class="muted tiny">From current results</span></div>
+          <div id="facets" class="mt"></div>
+        </section>
+      </main>
+    </section>
+  </div>
+
+  <div id="modal" class="modal hidden" aria-hidden="true">
+    <div class="modal-box">
+      <div class="head"><h2 id="modalTitle">Course details</h2><button id="closeModal" class="ghost" type="button">Close</button></div>
+      <p id="modalBody" class="subtle mt"></p>
+      <div id="modalMeta" class="chips mt"></div>
+    </div>
+  </div>
+
+  <script>
+    const $ = (id) => document.getElementById(id);
+    const state = { groups: [], active: -1, timer: null, aborter: null, recorder: null, stream: null, chunks: [], lastResults: [] };
+    const params = new URLSearchParams(window.location.search);
+    const esc = (v) => String(v ?? "").replaceAll("&","&amp;").replaceAll("<","&lt;").replaceAll(">","&gt;").replaceAll('"',"&quot;").replaceAll("'","&#39;");
+    const filters = () => ({ preferred_language: $("language").value || null, filters: { difficulty: $("difficulty").value || null, category: $("category").value || null, duration_max: $("duration").value ? Number($("duration").value) : null }, sort: $("sort").value });
+    const normalizeParam = (value) => String(value ?? "").trim().toLowerCase();
+
+    function applySelectParam(id, value) {
+      if (!value) return;
+      const select = $(id);
+      const match = Array.from(select.options).find((option) => normalizeParam(option.value) === normalizeParam(value));
+      if (match) select.value = match.value;
+    }
+
+    function applyParamsFromUrl() {
+      if (params.has("q")) $("query").value = params.get("q") || "";
+      applySelectParam("language", params.get("language"));
+      applySelectParam("difficulty", params.get("difficulty"));
+      applySelectParam("category", params.get("category"));
+      applySelectParam("duration", params.get("duration"));
+      applySelectParam("sort", params.get("sort"));
+    }
+
+    function hideSuggestions() { $("suggestions").classList.add("hidden"); $("suggestions").innerHTML = ""; state.groups = []; state.active = -1; }
+    function renderFilterChips() {
+      const f = filters(), items = [];
+      if (f.preferred_language) items.push(["Language", f.preferred_language]);
+      Object.entries(f.filters).forEach(([k, v]) => { if (v !== null && v !== "") items.push([k.replace("_max","").replaceAll("_"," "), String(v)]); });
+      if (f.sort !== "relevance") items.push(["Sort", f.sort]);
+      if (!items.length) { $("activeFilters").classList.add("hidden"); $("activeFilters").innerHTML = ""; return; }
+      $("activeFilters").innerHTML = items.map(([k, v]) => '<span class="tag">' + esc(k) + ": " + esc(v) + "</span>").join("");
+      $("activeFilters").classList.remove("hidden");
+    }
+    function setMessage(html, show = true) { $("message").innerHTML = html; $("message").classList.toggle("hidden", !show); }
+
+    function renderSuggestions(groups) {
+      if (!groups.length) return hideSuggestions();
+      state.groups = groups; let index = 0;
+      $("suggestions").innerHTML = groups.map((g) => '<div class="sg"><h3>' + esc(g.section) + '</h3>' + g.items.map((item) => '<button class="si" type="button" data-value="' + esc(item.text) + '" data-index="' + (index++) + '"><span>' + esc(item.text) + '</span><span class="muted tiny">' + Math.round((item.confidence || 0) * 100) + '%</span></button>').join("") + '</div>').join("");
+      $("suggestions").classList.remove("hidden");
+      $("suggestions").querySelectorAll(".si").forEach((b) => b.addEventListener("click", () => { $("query").value = b.dataset.value || ""; hideSuggestions(); runSearch(); }));
+    }
+
+    async function fetchSuggestions() {
+      const q = $("query").value.trim();
+      if (q.length < 2) return hideSuggestions();
+      if (state.aborter) state.aborter.abort();
+      state.aborter = new AbortController();
+      const params = new URLSearchParams({ q, limit: "8" });
+      if ($("language").value) params.set("preferred_language", $("language").value);
+      try {
+        const res = await fetch("/api/v1/suggest?" + params.toString(), { signal: state.aborter.signal });
+        if (!res.ok) return hideSuggestions();
+        renderSuggestions(await res.json());
+      } catch (e) { if (e.name !== "AbortError") hideSuggestions(); }
+    }
+
+    function closeModal() {
+      $("modal").classList.add("hidden");
+      $("modal").setAttribute("aria-hidden", "true");
+    }
+
+    function openModal(result) {
+      $("modalTitle").textContent = result.title;
+      $("modalBody").textContent = result.description;
+      $("modalMeta").innerHTML = [result.instructor, result.language, result.topic, result.category, result.difficulty, result.duration_minutes ? result.duration_minutes + " min" : null].filter(Boolean).map((x) => '<span class="tag">' + esc(x) + "</span>").join("");
+      $("modal").classList.remove("hidden");
+      $("modal").setAttribute("aria-hidden", "false");
+    }
+
+    function renderFacets(facets) {
+      const entries = Object.entries(facets || {}).filter(([, v]) => Object.keys(v || {}).length);
+      if (!entries.length) { $("facetPanel").classList.add("hidden"); $("facets").innerHTML = ""; return; }
+      $("facets").innerHTML = entries.map(([name, vals]) => '<div class="card notice"><strong>' + esc(name.replaceAll("_"," ")) + '</strong><div class="facets mt">' + Object.entries(vals || {}).map(([k, c]) => '<span class="tag">' + esc(k) + " (" + c + ")</span>").join("") + "</div></div>").join("");
+      $("facetPanel").classList.remove("hidden");
+    }
+
+    function renderResults(payload) {
+      const results = payload.results || [];
+      state.lastResults = results;
+      renderFilterChips();
+      $("summary").textContent = 'Showing ' + results.length + ' result(s) for "' + payload.original_query + '"';
+      const msg = [];
+      if (payload.corrected_query) msg.push("Showing results for <strong>" + esc(payload.corrected_query) + "</strong>.");
+      else if (payload.did_you_mean) msg.push('Did you mean <strong>' + esc(payload.did_you_mean) + "</strong>?");
+      if (!results.length) msg.push("We could not find an exact match, but you can try a broader topic or one of the suggestions below.");
+      if (payload.search_instead_for) msg.push("Showing similar results related to <strong>" + esc(payload.search_instead_for) + "</strong>.");
+      setMessage(msg.join(" "), msg.length > 0);
+      const related = [...new Set([...(payload.alternate_queries || []), ...((payload.grouped_suggestions || []).flatMap((g) => g.items.map((i) => i.text)))])].slice(0, 8);
+      if (related.length) {
+        $("related").innerHTML = '<strong>Suggested searches</strong><div class="chips mt">' + related.map((q) => '<button class="tag rq" type="button" data-query="' + esc(q) + '">' + esc(q) + "</button>").join("") + "</div>";
+        $("related").classList.remove("hidden");
+        $("related").querySelectorAll(".rq").forEach((b) => b.addEventListener("click", () => { $("query").value = b.dataset.query || ""; runSearch(); }));
+      } else $("related").classList.add("hidden");
+      if (!results.length) {
+        $("results").innerHTML = '<div class="card notice"><h3>No exact course found</h3><p class="subtle mt">Try a broader topic such as PPH, newborn care, KMC, or lactation counselling.</p><div class="chips mt"><button class="ghost nq" type="button" data-query="postpartum hemorrhage management">Try PPH management</button><button class="ghost nq" type="button" data-query="newborn danger signs">Try newborn danger signs</button><button class="ghost nq" type="button" data-query="lactation counselling">Try lactation counselling</button></div></div>';
+        $("results").querySelectorAll(".nq").forEach((b) => b.addEventListener("click", () => { $("query").value = b.dataset.query || ""; runSearch(); }));
+        $("facetPanel").classList.add("hidden");
+        return;
+      }
+      $("results").innerHTML = results.map((r, i) => {
+        const hint = r.difficulty === "beginner" ? "Beginner friendly" : r.language ? "Available in " + r.language : "Matches your search";
+        return '<article class="card"><div class="result-title"><div><h3>' + esc(r.title) + '</h3><p class="subtle mt">' + esc(r.description) + '</p></div><span class="hint">' + esc(hint) + '</span></div><div class="meta"><span class="tag">' + esc(r.instructor) + '</span><span class="tag">' + esc(r.language) + '</span><span class="tag">' + esc(r.category) + '</span><span class="tag">' + esc(r.topic) + '</span>' + (r.duration_minutes ? '<span class="tag">' + esc(r.duration_minutes) + ' min</span>' : "") + '</div><div class="actions"><button class="secondary viewBtn" type="button" data-index="' + i + '">View details</button></div></article>';
+      }).join("");
+      $("results").querySelectorAll(".viewBtn").forEach((b) => b.addEventListener("click", () => openModal(state.lastResults[Number(b.dataset.index)])));
+      renderFacets(payload.facets || {});
+    }
+
+    async function runSearch() {
+      hideSuggestions();
+      const query = $("query").value.trim();
+      if (!query) return $("summary").textContent = "Enter a query to search.";
+      const f = filters();
+      const body = { query, preferred_language: f.preferred_language, filters: f.filters, sort: f.sort };
+      $("summary").textContent = "Searching...";
+      setMessage("", false);
+      try {
+        const res = await fetch("/api/v1/search", { method: "POST", headers: { "Content-Type": "application/json" }, body: JSON.stringify(body) });
+        const payload = await res.json();
+        if (!res.ok) { setMessage("Search could not be completed right now."); $("results").innerHTML = ""; return; }
+        renderResults(payload);
+      } catch {
+        setMessage("Search could not be completed right now.");
+        $("results").innerHTML = "";
+      }
+    }
+
+    async function sendVoice(file, filename, type) {
+      $("voiceState").textContent = "Searching";
+      const params = new URLSearchParams();
+      if ($("language").value) params.set("preferred_language", $("language").value);
+      const form = new FormData(); form.append("file", file, filename);
+      try {
+        const res = await fetch("/api/v1/search/voice?" + params.toString(), { method: "POST", body: form });
+        const payload = await res.json();
+        if (!res.ok) {
+          $("voiceState").textContent = "Voice unavailable";
+          setMessage(esc(payload.error?.message || "Voice search is unavailable right now."));
+          return;
+        }
+        if (payload.degraded) {
+          $("voiceState").textContent = "Voice unavailable";
+          setMessage(esc(payload.degradation_reason || "Voice search is unavailable right now."));
+          return;
+        }
+        $("voiceState").textContent = "Results ready";
+        if (payload.transcript_cleaned) $("query").value = payload.transcript_cleaned;
+        if (payload.search_response) renderResults(payload.search_response);
+      } catch {
+        $("voiceState").textContent = "Voice unavailable";
+        setMessage("Voice search could not be completed right now.");
+      }
+    }
+
+    async function startRecording() {
+      if (!navigator.mediaDevices?.getUserMedia || typeof MediaRecorder === "undefined") { $("voiceState").textContent = "Microphone unavailable"; return; }
+      try {
+        state.stream = await navigator.mediaDevices.getUserMedia({ audio: true });
+        state.chunks = []; state.recorder = new MediaRecorder(state.stream);
+        state.recorder.ondataavailable = (e) => { if (e.data?.size) state.chunks.push(e.data); };
+        state.recorder.onstop = async () => {
+          const blob = new Blob(state.chunks, { type: state.recorder.mimeType || "audio/webm" });
+          state.stream.getTracks().forEach((t) => t.stop());
+          $("voiceState").textContent = "Transcribing";
+          $("micBtn").textContent = "Voice";
+          await sendVoice(blob, "voice-query.webm", blob.type);
+          state.recorder = null; state.stream = null;
+        };
+        state.recorder.start(); $("micBtn").textContent = "Stop"; $("voiceState").textContent = "Listening";
+      } catch {
+        $("voiceState").textContent = "Microphone unavailable";
+      }
+    }
+
+    $("query").addEventListener("input", () => { clearTimeout(state.timer); state.timer = setTimeout(fetchSuggestions, 180); });
+    $("query").addEventListener("keydown", (e) => { if (e.key === "Enter") { e.preventDefault(); runSearch(); } });
+    document.addEventListener("click", (e) => { if (!$("suggestions").contains(e.target) && e.target !== $("query")) hideSuggestions(); });
+    ["language","difficulty","category","duration","sort"].forEach((id) => $(id).addEventListener("change", renderFilterChips));
+    $("searchBtn").addEventListener("click", runSearch);
+    $("clearFilters").addEventListener("click", () => { $("language").value = ""; $("difficulty").value = ""; $("category").value = ""; $("duration").value = ""; $("sort").value = "relevance"; renderFilterChips(); });
+    $("uploadBtn").addEventListener("click", () => $("audioInput").click());
+    $("audioInput").addEventListener("change", async () => { const file = $("audioInput").files?.[0]; if (file) await sendVoice(file, file.name, file.type || "audio/wav"); $("audioInput").value = ""; });
+    $("micBtn").addEventListener("click", () => state.recorder && state.recorder.state === "recording" ? state.recorder.stop() : startRecording());
+    $("closeModal").addEventListener("click", closeModal);
+    $("modal").addEventListener("click", (e) => { if (e.target === $("modal")) closeModal(); });
+    document.addEventListener("keydown", (e) => { if (e.key === "Escape" && !$("modal").classList.contains("hidden")) closeModal(); });
+    document.querySelectorAll(".sample,.topicChip").forEach((b) => b.addEventListener("click", () => { $("query").value = b.dataset.query || ""; runSearch(); }));
+    applyParamsFromUrl();
+    renderFilterChips();
+    if (["1","true","yes"].includes(normalizeParam(params.get("autorun")))) runSearch();
+  </script>
+</body>
+</html>

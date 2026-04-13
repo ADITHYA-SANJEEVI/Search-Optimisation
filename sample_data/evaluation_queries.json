@@ -1,0 +1,2211 @@
+[
+  {
+    "query": "कंगारू मदर केयर की समझ",
+    "expected_group_id": "kangaroo-mother-care",
+    "tags": [
+      "exact_title",
+      "hindi_script"
+    ]
+  },
+  {
+    "query": "   कंगारू   मदर   केयर   की   समझ   ",
+    "expected_group_id": "kangaroo-mother-care",
+    "tags": [
+      "exact_title",
+      "hindi_script",
+      "generated_extra_spaces"
+    ]
+  },
+  {
+    "query": "!! कंगारू मदर केयर की समझ ??",
+    "expected_group_id": "kangaroo-mother-care",
+    "tags": [
+      "exact_title",
+      "hindi_script",
+      "generated_punctuation"
+    ]
+  },
+  {
+    "query": "show me a course about कंगारू मदर केयर की समझ",
+    "expected_group_id": "kangaroo-mother-care",
+    "tags": [
+      "exact_title",
+      "hindi_script",
+      "generated_nlp"
+    ]
+  },
+  {
+    "query": "kmc samajh",
+    "expected_group_id": "kangaroo-mother-care",
+    "tags": [
+      "acronym",
+      "romanized_hindi"
+    ]
+  },
+  {
+    "query": "   kmc   samajh   ",
+    "expected_group_id": "kangaroo-mother-care",
+    "tags": [
+      "acronym",
+      "romanized_hindi",
+      "generated_extra_spaces"
+    ]
+  },
+  {
+    "query": "!! kmc samajh ??",
+    "expected_group_id": "kangaroo-mother-care",
+    "tags": [
+      "acronym",
+      "romanized_hindi",
+      "generated_punctuation"
+    ]
+  },
+  {
+    "query": "show me a course about kmc samajh",
+    "expected_group_id": "kangaroo-mother-care",
+    "tags": [
+      "acronym",
+      "romanized_hindi",
+      "generated_nlp"
+    ]
+  },
+  {
+    "query": "KMC SAMAJH",
+    "expected_group_id": "kangaroo-mother-care",
+    "tags": [
+      "acronym",
+      "romanized_hindi",
+      "generated_uppercase"
+    ]
+  },
+  {
+    "query": "kmcsamajh",
+    "expected_group_id": "kangaroo-mother-care",
+    "tags": [
+      "acronym",
+      "romanized_hindi",
+      "generated_no_space"
+    ]
+  },
+  {
+    "query": "kangaroo mother care",
+    "expected_group_id": "kangaroo-mother-care",
+    "tags": [
+      "english_alias"
+    ]
+  },
+  {
+    "query": "   kangaroo   mother   care   ",
+    "expected_group_id": "kangaroo-mother-care",
+    "tags": [
+      "english_alias",
+      "generated_extra_spaces"
+    ]
+  },
+  {
+    "query": "!! kangaroo mother care ??",
+    "expected_group_id": "kangaroo-mother-care",
+    "tags": [
+      "english_alias",
+      "generated_punctuation"
+    ]
+  },
+  {
+    "query": "show me a course about kangaroo mother care",
+    "expected_group_id": "kangaroo-mother-care",
+    "tags": [
+      "english_alias",
+      "generated_nlp"
+    ]
+  },
+  {
+    "query": "KANGAROO MOTHER CARE",
+    "expected_group_id": "kangaroo-mother-care",
+    "tags": [
+      "english_alias",
+      "generated_uppercase"
+    ]
+  },
+  {
+    "query": "kangaroomothercare",
+    "expected_group_id": "kangaroo-mother-care",
+    "tags": [
+      "english_alias",
+      "generated_no_space"
+    ]
+  },
+  {
+    "query": "माँ और नवजात शिशु में खतरे के संकेत",
+    "expected_group_id": "stage4-monitoring-danger-signs",
+    "tags": [
+      "exact_title",
+      "hindi_script"
+    ]
+  },
+  {
+    "query": "   माँ   और   नवजात   शिशु   में   खतरे   के   संकेत   ",
+    "expected_group_id": "stage4-monitoring-danger-signs",
+    "tags": [
+      "exact_title",
+      "hindi_script",
+      "generated_extra_spaces"
+    ]
+  },
+  {
+    "query": "!! माँ और नवजात शिशु में खतरे के संकेत ??",
+    "expected_group_id": "stage4-monitoring-danger-signs",
+    "tags": [
+      "exact_title",
+      "hindi_script",
+      "generated_punctuation"
+    ]
+  },
+  {
+    "query": "show me a course about माँ और नवजात शिशु में खतरे के संकेत",
+    "expected_group_id": "stage4-monitoring-danger-signs",
+    "tags": [
+      "exact_title",
+      "hindi_script",
+      "generated_nlp"
+    ]
+  },
+  {
+    "query": "mother newborn danger signs",
+    "expected_group_id": "stage4-monitoring-danger-signs",
+    "tags": [
+      "english_alias",
+      "word_order"
+    ]
+  },
+  {
+    "query": "   mother   newborn   danger   signs   ",
+    "expected_group_id": "stage4-monitoring-danger-signs",
+    "tags": [
+      "english_alias",
+      "word_order",
+      "generated_extra_spaces"
+    ]
+  },
+  {
+    "query": "!! mother newborn danger signs ??",
+    "expected_group_id": "stage4-monitoring-danger-signs",
+    "tags": [
+      "english_alias",
+      "word_order",
+      "generated_punctuation"
+    ]
+  },
+  {
+    "query": "show me a course about mother newborn danger signs",
+    "expected_group_id": "stage4-monitoring-danger-signs",
+    "tags": [
+      "english_alias",
+      "word_order",
+      "generated_nlp"
+    ]
+  },
+  {
+    "query": "MOTHER NEWBORN DANGER SIGNS",
+    "expected_group_id": "stage4-monitoring-danger-signs",
+    "tags": [
+      "english_alias",
+      "word_order",
+      "generated_uppercase"
+    ]
+  },
+  {
+    "query": "mothernewborndangersigns",
+    "expected_group_id": "stage4-monitoring-danger-signs",
+    "tags": [
+      "english_alias",
+      "word_order",
+      "generated_no_space"
+    ]
+  },
+  {
+    "query": "garbhavastha hrp",
+    "expected_group_id": "high-risk-pregnancy",
+    "tags": [
+      "romanized_hindi",
+      "acronym"
+    ]
+  },
+  {
+    "query": "   garbhavastha   hrp   ",
+    "expected_group_id": "high-risk-pregnancy",
+    "tags": [
+      "romanized_hindi",
+      "acronym",
+      "generated_extra_spaces"
+    ]
+  },
+  {
+    "query": "!! garbhavastha hrp ??",
+    "expected_group_id": "high-risk-pregnancy",
+    "tags": [
+      "romanized_hindi",
+      "acronym",
+      "generated_punctuation"
+    ]
+  },
+  {
+    "query": "show me a course about garbhavastha hrp",
+    "expected_group_id": "high-risk-pregnancy",
+    "tags": [
+      "romanized_hindi",
+      "acronym",
+      "generated_nlp"
+    ]
+  },
+  {
+    "query": "GARBHAVASTHA HRP",
+    "expected_group_id": "high-risk-pregnancy",
+    "tags": [
+      "romanized_hindi",
+      "acronym",
+      "generated_uppercase"
+    ]
+  },
+  {
+    "query": "garbhavasthahrp",
+    "expected_group_id": "high-risk-pregnancy",
+    "tags": [
+      "romanized_hindi",
+      "acronym",
+      "generated_no_space"
+    ]
+  },
+  {
+    "query": "high risk pregnancy danger signs",
+    "expected_group_id": "high-risk-pregnancy",
+    "tags": [
+      "english_alias",
+      "nlp"
+    ]
+  },
+  {
+    "query": "   high   risk   pregnancy   danger   signs   ",
+    "expected_group_id": "high-risk-pregnancy",
+    "tags": [
+      "english_alias",
+      "nlp",
+      "generated_extra_spaces"
+    ]
+  },
+  {
+    "query": "!! high risk pregnancy danger signs ??",
+    "expected_group_id": "high-risk-pregnancy",
+    "tags": [
+      "english_alias",
+      "nlp",
+      "generated_punctuation"
+    ]
+  },
+  {
+    "query": "show me a course about high risk pregnancy danger signs",
+    "expected_group_id": "high-risk-pregnancy",
+    "tags": [
+      "english_alias",
+      "nlp",
+      "generated_nlp"
+    ]
+  },
+  {
+    "query": "HIGH RISK PREGNANCY DANGER SIGNS",
+    "expected_group_id": "high-risk-pregnancy",
+    "tags": [
+      "english_alias",
+      "nlp",
+      "generated_uppercase"
+    ]
+  },
+  {
+    "query": "highriskpregnancydangersigns",
+    "expected_group_id": "high-risk-pregnancy",
+    "tags": [
+      "english_alias",
+      "nlp",
+      "generated_no_space"
+    ]
+  },
+  {
+    "query": "FRU referral pregnancy",
+    "expected_group_id": "pregnancy-referral",
+    "tags": [
+      "acronym",
+      "english_alias"
+    ]
+  },
+  {
+    "query": "   FRU   referral   pregnancy   ",
+    "expected_group_id": "pregnancy-referral",
+    "tags": [
+      "acronym",
+      "english_alias",
+      "generated_extra_spaces"
+    ]
+  },
+  {
+    "query": "!! FRU referral pregnancy ??",
+    "expected_group_id": "pregnancy-referral",
+    "tags": [
+      "acronym",
+      "english_alias",
+      "generated_punctuation"
+    ]
+  },
+  {
+    "query": "show me a course about FRU referral pregnancy",
+    "expected_group_id": "pregnancy-referral",
+    "tags": [
+      "acronym",
+      "english_alias",
+      "generated_nlp"
+    ]
+  },
+  {
+    "query": "FRU REFERRAL PREGNANCY",
+    "expected_group_id": "pregnancy-referral",
+    "tags": [
+      "acronym",
+      "english_alias",
+      "generated_uppercase"
+    ]
+  },
+  {
+    "query": "FRUreferralpregnancy",
+    "expected_group_id": "pregnancy-referral",
+    "tags": [
+      "acronym",
+      "english_alias",
+      "generated_no_space"
+    ]
+  },
+  {
+    "query": "surakshit garbhavastha anc",
+    "expected_group_id": "safe-pregnancy-anc",
+    "tags": [
+      "romanized_hindi",
+      "acronym"
+    ]
+  },
+  {
+    "query": "   surakshit   garbhavastha   anc   ",
+    "expected_group_id": "safe-pregnancy-anc",
+    "tags": [
+      "romanized_hindi",
+      "acronym",
+      "generated_extra_spaces"
+    ]
+  },
+  {
+    "query": "!! surakshit garbhavastha anc ??",
+    "expected_group_id": "safe-pregnancy-anc",
+    "tags": [
+      "romanized_hindi",
+      "acronym",
+      "generated_punctuation"
+    ]
+  },
+  {
+    "query": "show me a course about surakshit garbhavastha anc",
+    "expected_group_id": "safe-pregnancy-anc",
+    "tags": [
+      "romanized_hindi",
+      "acronym",
+      "generated_nlp"
+    ]
+  },
+  {
+    "query": "SURAKSHIT GARBHAVASTHA ANC",
+    "expected_group_id": "safe-pregnancy-anc",
+    "tags": [
+      "romanized_hindi",
+      "acronym",
+      "generated_uppercase"
+    ]
+  },
+  {
+    "query": "surakshitgarbhavasthaanc",
+    "expected_group_id": "safe-pregnancy-anc",
+    "tags": [
+      "romanized_hindi",
+      "acronym",
+      "generated_no_space"
+    ]
+  },
+  {
+    "query": "respectful maternity care",
+    "expected_group_id": "respectful-maternity-care",
+    "tags": [
+      "exact_topic"
+    ]
+  },
+  {
+    "query": "   respectful   maternity   care   ",
+    "expected_group_id": "respectful-maternity-care",
+    "tags": [
+      "exact_topic",
+      "generated_extra_spaces"
+    ]
+  },
+  {
+    "query": "!! respectful maternity care ??",
+    "expected_group_id": "respectful-maternity-care",
+    "tags": [
+      "exact_topic",
+      "generated_punctuation"
+    ]
+  },
+  {
+    "query": "show me a course about respectful maternity care",
+    "expected_group_id": "respectful-maternity-care",
+    "tags": [
+      "exact_topic",
+      "generated_nlp"
+    ]
+  },
+  {
+    "query": "RESPECTFUL MATERNITY CARE",
+    "expected_group_id": "respectful-maternity-care",
+    "tags": [
+      "exact_topic",
+      "generated_uppercase"
+    ]
+  },
+  {
+    "query": "respectfulmaternitycare",
+    "expected_group_id": "respectful-maternity-care",
+    "tags": [
+      "exact_topic",
+      "generated_no_space"
+    ]
+  },
+  {
+    "query": "sammanjanak matritva dekhbhal",
+    "expected_group_id": "respectful-maternity-care",
+    "tags": [
+      "romanized_hindi"
+    ]
+  },
+  {
+    "query": "   sammanjanak   matritva   dekhbhal   ",
+    "expected_group_id": "respectful-maternity-care",
+    "tags": [
+      "romanized_hindi",
+      "generated_extra_spaces"
+    ]
+  },
+  {
+    "query": "!! sammanjanak matritva dekhbhal ??",
+    "expected_group_id": "respectful-maternity-care",
+    "tags": [
+      "romanized_hindi",
+      "generated_punctuation"
+    ]
+  },
+  {
+    "query": "show me a course about sammanjanak matritva dekhbhal",
+    "expected_group_id": "respectful-maternity-care",
+    "tags": [
+      "romanized_hindi",
+      "generated_nlp"
+    ]
+  },
+  {
+    "query": "SAMMANJANAK MATRITVA DEKHBHAL",
+    "expected_group_id": "respectful-maternity-care",
+    "tags": [
+      "romanized_hindi",
+      "generated_uppercase"
+    ]
+  },
+  {
+    "query": "sammanjanakmatritvadekhbhal",
+    "expected_group_id": "respectful-maternity-care",
+    "tags": [
+      "romanized_hindi",
+      "generated_no_space"
+    ]
+  },
+  {
+    "query": "lactation counselor",
+    "expected_group_id": "lactation-counselor-program",
+    "tags": [
+      "exact_topic"
+    ]
+  },
+  {
+    "query": "   lactation   counselor   ",
+    "expected_group_id": "lactation-counselor-program",
+    "tags": [
+      "exact_topic",
+      "generated_extra_spaces"
+    ]
+  },
+  {
+    "query": "!! lactation counselor ??",
+    "expected_group_id": "lactation-counselor-program",
+    "tags": [
+      "exact_topic",
+      "generated_punctuation"
+    ]
+  },
+  {
+    "query": "show me a course about lactation counselor",
+    "expected_group_id": "lactation-counselor-program",
+    "tags": [
+      "exact_topic",
+      "generated_nlp"
+    ]
+  },
+  {
+    "query": "LACTATION COUNSELOR",
+    "expected_group_id": "lactation-counselor-program",
+    "tags": [
+      "exact_topic",
+      "generated_uppercase"
+    ]
+  },
+  {
+    "query": "lactationcounselor",
+    "expected_group_id": "lactation-counselor-program",
+    "tags": [
+      "exact_topic",
+      "generated_no_space"
+    ]
+  },
+  {
+    "query": "lactaion counsler",
+    "expected_group_id": "lactation-counselor-program",
+    "tags": [
+      "typo"
+    ]
+  },
+  {
+    "query": "   lactaion   counsler   ",
+    "expected_group_id": "lactation-counselor-program",
+    "tags": [
+      "typo",
+      "generated_extra_spaces"
+    ]
+  },
+  {
+    "query": "!! lactaion counsler ??",
+    "expected_group_id": "lactation-counselor-program",
+    "tags": [
+      "typo",
+      "generated_punctuation"
+    ]
+  },
+  {
+    "query": "show me a course about lactaion counsler",
+    "expected_group_id": "lactation-counselor-program",
+    "tags": [
+      "typo",
+      "generated_nlp"
+    ]
+  },
+  {
+    "query": "LACTAION COUNSLER",
+    "expected_group_id": "lactation-counselor-program",
+    "tags": [
+      "typo",
+      "generated_uppercase"
+    ]
+  },
+  {
+    "query": "lactaioncounsler",
+    "expected_group_id": "lactation-counselor-program",
+    "tags": [
+      "typo",
+      "generated_no_space"
+    ]
+  },
+  {
+    "query": "fever pregnancy",
+    "expected_group_id": "fever-pregnancy",
+    "tags": [
+      "word_order"
+    ]
+  },
+  {
+    "query": "   fever   pregnancy   ",
+    "expected_group_id": "fever-pregnancy",
+    "tags": [
+      "word_order",
+      "generated_extra_spaces"
+    ]
+  },
+  {
+    "query": "!! fever pregnancy ??",
+    "expected_group_id": "fever-pregnancy",
+    "tags": [
+      "word_order",
+      "generated_punctuation"
+    ]
+  },
+  {
+    "query": "show me a course about fever pregnancy",
+    "expected_group_id": "fever-pregnancy",
+    "tags": [
+      "word_order",
+      "generated_nlp"
+    ]
+  },
+  {
+    "query": "FEVER PREGNANCY",
+    "expected_group_id": "fever-pregnancy",
+    "tags": [
+      "word_order",
+      "generated_uppercase"
+    ]
+  },
+  {
+    "query": "feverpregnancy",
+    "expected_group_id": "fever-pregnancy",
+    "tags": [
+      "word_order",
+      "generated_no_space"
+    ]
+  },
+  {
+    "query": "pet ki janch pregnancy",
+    "expected_group_id": "abdominal-examination",
+    "tags": [
+      "romanized_hindi",
+      "mixed_intent"
+    ]
+  },
+  {
+    "query": "   pet   ki   janch   pregnancy   ",
+    "expected_group_id": "abdominal-examination",
+    "tags": [
+      "romanized_hindi",
+      "mixed_intent",
+      "generated_extra_spaces"
+    ]
+  },
+  {
+    "query": "!! pet ki janch pregnancy ??",
+    "expected_group_id": "abdominal-examination",
+    "tags": [
+      "romanized_hindi",
+      "mixed_intent",
+      "generated_punctuation"
+    ]
+  },
+  {
+    "query": "show me a course about pet ki janch pregnancy",
+    "expected_group_id": "abdominal-examination",
+    "tags": [
+      "romanized_hindi",
+      "mixed_intent",
+      "generated_nlp"
+    ]
+  },
+  {
+    "query": "PET KI JANCH PREGNANCY",
+    "expected_group_id": "abdominal-examination",
+    "tags": [
+      "romanized_hindi",
+      "mixed_intent",
+      "generated_uppercase"
+    ]
+  },
+  {
+    "query": "petkijanchpregnancy",
+    "expected_group_id": "abdominal-examination",
+    "tags": [
+      "romanized_hindi",
+      "mixed_intent",
+      "generated_no_space"
+    ]
+  },
+  {
+    "query": "rakta parikshan",
+    "expected_group_id": "routine-tests-pregnancy",
+    "tags": [
+      "romanized_hindi"
+    ]
+  },
+  {
+    "query": "   rakta   parikshan   ",
+    "expected_group_id": "routine-tests-pregnancy",
+    "tags": [
+      "romanized_hindi",
+      "generated_extra_spaces"
+    ]
+  },
+  {
+    "query": "!! rakta parikshan ??",
+    "expected_group_id": "routine-tests-pregnancy",
+    "tags": [
+      "romanized_hindi",
+      "generated_punctuation"
+    ]
+  },
+  {
+    "query": "show me a course about rakta parikshan",
+    "expected_group_id": "routine-tests-pregnancy",
+    "tags": [
+      "romanized_hindi",
+      "generated_nlp"
+    ]
+  },
+  {
+    "query": "RAKTA PARIKSHAN",
+    "expected_group_id": "routine-tests-pregnancy",
+    "tags": [
+      "romanized_hindi",
+      "generated_uppercase"
+    ]
+  },
+  {
+    "query": "raktaparikshan",
+    "expected_group_id": "routine-tests-pregnancy",
+    "tags": [
+      "romanized_hindi",
+      "generated_no_space"
+    ]
+  },
+  {
+    "query": "mutra जांच",
+    "expected_group_id": "routine-tests-pregnancy",
+    "tags": [
+      "code_mixed"
+    ]
+  },
+  {
+    "query": "   mutra   जांच   ",
+    "expected_group_id": "routine-tests-pregnancy",
+    "tags": [
+      "code_mixed",
+      "generated_extra_spaces"
+    ]
+  },
+  {
+    "query": "!! mutra जांच ??",
+    "expected_group_id": "routine-tests-pregnancy",
+    "tags": [
+      "code_mixed",
+      "generated_punctuation"
+    ]
+  },
+  {
+    "query": "show me a course about mutra जांच",
+    "expected_group_id": "routine-tests-pregnancy",
+    "tags": [
+      "code_mixed",
+      "generated_nlp"
+    ]
+  },
+  {
+    "query": "bp weight nutrition",
+    "expected_group_id": "vitals-and-nutrition",
+    "tags": [
+      "english_alias"
+    ]
+  },
+  {
+    "query": "   bp   weight   nutrition   ",
+    "expected_group_id": "vitals-and-nutrition",
+    "tags": [
+      "english_alias",
+      "generated_extra_spaces"
+    ]
+  },
+  {
+    "query": "!! bp weight nutrition ??",
+    "expected_group_id": "vitals-and-nutrition",
+    "tags": [
+      "english_alias",
+      "generated_punctuation"
+    ]
+  },
+  {
+    "query": "show me a course about bp weight nutrition",
+    "expected_group_id": "vitals-and-nutrition",
+    "tags": [
+      "english_alias",
+      "generated_nlp"
+    ]
+  },
+  {
+    "query": "BP WEIGHT NUTRITION",
+    "expected_group_id": "vitals-and-nutrition",
+    "tags": [
+      "english_alias",
+      "generated_uppercase"
+    ]
+  },
+  {
+    "query": "bpweightnutrition",
+    "expected_group_id": "vitals-and-nutrition",
+    "tags": [
+      "english_alias",
+      "generated_no_space"
+    ]
+  },
+  {
+    "query": "pregnancy confirmation early registration",
+    "expected_group_id": "pregnancy-identification",
+    "tags": [
+      "english_alias"
+    ]
+  },
+  {
+    "query": "   pregnancy   confirmation   early   registration   ",
+    "expected_group_id": "pregnancy-identification",
+    "tags": [
+      "english_alias",
+      "generated_extra_spaces"
+    ]
+  },
+  {
+    "query": "!! pregnancy confirmation early registration ??",
+    "expected_group_id": "pregnancy-identification",
+    "tags": [
+      "english_alias",
+      "generated_punctuation"
+    ]
+  },
+  {
+    "query": "show me a course about pregnancy confirmation early registration",
+    "expected_group_id": "pregnancy-identification",
+    "tags": [
+      "english_alias",
+      "generated_nlp"
+    ]
+  },
+  {
+    "query": "PREGNANCY CONFIRMATION EARLY REGISTRATION",
+    "expected_group_id": "pregnancy-identification",
+    "tags": [
+      "english_alias",
+      "generated_uppercase"
+    ]
+  },
+  {
+    "query": "pregnancyconfirmationearlyregistration",
+    "expected_group_id": "pregnancy-identification",
+    "tags": [
+      "english_alias",
+      "generated_no_space"
+    ]
+  },
+  {
+    "query": "family planning lam",
+    "expected_group_id": "family-planning-lam",
+    "tags": [
+      "acronym",
+      "english_alias"
+    ]
+  },
+  {
+    "query": "   family   planning   lam   ",
+    "expected_group_id": "family-planning-lam",
+    "tags": [
+      "acronym",
+      "english_alias",
+      "generated_extra_spaces"
+    ]
+  },
+  {
+    "query": "!! family planning lam ??",
+    "expected_group_id": "family-planning-lam",
+    "tags": [
+      "acronym",
+      "english_alias",
+      "generated_punctuation"
+    ]
+  },
+  {
+    "query": "show me a course about family planning lam",
+    "expected_group_id": "family-planning-lam",
+    "tags": [
+      "acronym",
+      "english_alias",
+      "generated_nlp"
+    ]
+  },
+  {
+    "query": "FAMILY PLANNING LAM",
+    "expected_group_id": "family-planning-lam",
+    "tags": [
+      "acronym",
+      "english_alias",
+      "generated_uppercase"
+    ]
+  },
+  {
+    "query": "familyplanninglam",
+    "expected_group_id": "family-planning-lam",
+    "tags": [
+      "acronym",
+      "english_alias",
+      "generated_no_space"
+    ]
+  },
+  {
+    "query": "normal delivery conduct",
+    "expected_group_id": "normal-delivery",
+    "tags": [
+      "word_order"
+    ]
+  },
+  {
+    "query": "   normal   delivery   conduct   ",
+    "expected_group_id": "normal-delivery",
+    "tags": [
+      "word_order",
+      "generated_extra_spaces"
+    ]
+  },
+  {
+    "query": "!! normal delivery conduct ??",
+    "expected_group_id": "normal-delivery",
+    "tags": [
+      "word_order",
+      "generated_punctuation"
+    ]
+  },
+  {
+    "query": "show me a course about normal delivery conduct",
+    "expected_group_id": "normal-delivery",
+    "tags": [
+      "word_order",
+      "generated_nlp"
+    ]
+  },
+  {
+    "query": "NORMAL DELIVERY CONDUCT",
+    "expected_group_id": "normal-delivery",
+    "tags": [
+      "word_order",
+      "generated_uppercase"
+    ]
+  },
+  {
+    "query": "normaldeliveryconduct",
+    "expected_group_id": "normal-delivery",
+    "tags": [
+      "word_order",
+      "generated_no_space"
+    ]
+  },
+  {
+    "query": "emergency triage",
+    "expected_group_id": "emergency-triage",
+    "tags": [
+      "prefix"
+    ]
+  },
+  {
+    "query": "   emergency   triage   ",
+    "expected_group_id": "emergency-triage",
+    "tags": [
+      "prefix",
+      "generated_extra_spaces"
+    ]
+  },
+  {
+    "query": "!! emergency triage ??",
+    "expected_group_id": "emergency-triage",
+    "tags": [
+      "prefix",
+      "generated_punctuation"
+    ]
+  },
+  {
+    "query": "show me a course about emergency triage",
+    "expected_group_id": "emergency-triage",
+    "tags": [
+      "prefix",
+      "generated_nlp"
+    ]
+  },
+  {
+    "query": "EMERGENCY TRIAGE",
+    "expected_group_id": "emergency-triage",
+    "tags": [
+      "prefix",
+      "generated_uppercase"
+    ]
+  },
+  {
+    "query": "emergencytriage",
+    "expected_group_id": "emergency-triage",
+    "tags": [
+      "prefix",
+      "generated_no_space"
+    ]
+  },
+  {
+    "query": "iv dawa blood sample",
+    "expected_group_id": "injectables-iv-fluid-therapy",
+    "tags": [
+      "code_mixed"
+    ]
+  },
+  {
+    "query": "   iv   dawa   blood   sample   ",
+    "expected_group_id": "injectables-iv-fluid-therapy",
+    "tags": [
+      "code_mixed",
+      "generated_extra_spaces"
+    ]
+  },
+  {
+    "query": "!! iv dawa blood sample ??",
+    "expected_group_id": "injectables-iv-fluid-therapy",
+    "tags": [
+      "code_mixed",
+      "generated_punctuation"
+    ]
+  },
+  {
+    "query": "show me a course about iv dawa blood sample",
+    "expected_group_id": "injectables-iv-fluid-therapy",
+    "tags": [
+      "code_mixed",
+      "generated_nlp"
+    ]
+  },
+  {
+    "query": "IV DAWA BLOOD SAMPLE",
+    "expected_group_id": "injectables-iv-fluid-therapy",
+    "tags": [
+      "code_mixed",
+      "generated_uppercase"
+    ]
+  },
+  {
+    "query": "ivdawabloodsample",
+    "expected_group_id": "injectables-iv-fluid-therapy",
+    "tags": [
+      "code_mixed",
+      "generated_no_space"
+    ]
+  },
+  {
+    "query": "pph mulyankan",
+    "expected_group_id": "postpartum-hemorrhage",
+    "tags": [
+      "acronym",
+      "romanized_hindi"
+    ]
+  },
+  {
+    "query": "   pph   mulyankan   ",
+    "expected_group_id": "postpartum-hemorrhage",
+    "tags": [
+      "acronym",
+      "romanized_hindi",
+      "generated_extra_spaces"
+    ]
+  },
+  {
+    "query": "!! pph mulyankan ??",
+    "expected_group_id": "postpartum-hemorrhage",
+    "tags": [
+      "acronym",
+      "romanized_hindi",
+      "generated_punctuation"
+    ]
+  },
+  {
+    "query": "show me a course about pph mulyankan",
+    "expected_group_id": "postpartum-hemorrhage",
+    "tags": [
+      "acronym",
+      "romanized_hindi",
+      "generated_nlp"
+    ]
+  },
+  {
+    "query": "PPH MULYANKAN",
+    "expected_group_id": "postpartum-hemorrhage",
+    "tags": [
+      "acronym",
+      "romanized_hindi",
+      "generated_uppercase"
+    ]
+  },
+  {
+    "query": "pphmulyankan",
+    "expected_group_id": "postpartum-hemorrhage",
+    "tags": [
+      "acronym",
+      "romanized_hindi",
+      "generated_no_space"
+    ]
+  },
+  {
+    "query": "postpartum hemorrhage assessment",
+    "expected_group_id": "postpartum-hemorrhage",
+    "tags": [
+      "english_alias"
+    ]
+  },
+  {
+    "query": "   postpartum   hemorrhage   assessment   ",
+    "expected_group_id": "postpartum-hemorrhage",
+    "tags": [
+      "english_alias",
+      "generated_extra_spaces"
+    ]
+  },
+  {
+    "query": "!! postpartum hemorrhage assessment ??",
+    "expected_group_id": "postpartum-hemorrhage",
+    "tags": [
+      "english_alias",
+      "generated_punctuation"
+    ]
+  },
+  {
+    "query": "show me a course about postpartum hemorrhage assessment",
+    "expected_group_id": "postpartum-hemorrhage",
+    "tags": [
+      "english_alias",
+      "generated_nlp"
+    ]
+  },
+  {
+    "query": "POSTPARTUM HEMORRHAGE ASSESSMENT",
+    "expected_group_id": "postpartum-hemorrhage",
+    "tags": [
+      "english_alias",
+      "generated_uppercase"
+    ]
+  },
+  {
+    "query": "postpartumhemorrhageassessment",
+    "expected_group_id": "postpartum-hemorrhage",
+    "tags": [
+      "english_alias",
+      "generated_no_space"
+    ]
+  },
+  {
+    "query": "pph advanced management",
+    "expected_group_id": "postpartum-hemorrhage",
+    "tags": [
+      "acronym"
+    ]
+  },
+  {
+    "query": "   pph   advanced   management   ",
+    "expected_group_id": "postpartum-hemorrhage",
+    "tags": [
+      "acronym",
+      "generated_extra_spaces"
+    ]
+  },
+  {
+    "query": "!! pph advanced management ??",
+    "expected_group_id": "postpartum-hemorrhage",
+    "tags": [
+      "acronym",
+      "generated_punctuation"
+    ]
+  },
+  {
+    "query": "show me a course about pph advanced management",
+    "expected_group_id": "postpartum-hemorrhage",
+    "tags": [
+      "acronym",
+      "generated_nlp"
+    ]
+  },
+  {
+    "query": "PPH ADVANCED MANAGEMENT",
+    "expected_group_id": "postpartum-hemorrhage",
+    "tags": [
+      "acronym",
+      "generated_uppercase"
+    ]
+  },
+  {
+    "query": "pphadvancedmanagement",
+    "expected_group_id": "postpartum-hemorrhage",
+    "tags": [
+      "acronym",
+      "generated_no_space"
+    ]
+  },
+  {
+    "query": "enbc परिचय",
+    "expected_group_id": "essential-newborn-care",
+    "tags": [
+      "acronym",
+      "code_mixed"
+    ]
+  },
+  {
+    "query": "   enbc   परिचय   ",
+    "expected_group_id": "essential-newborn-care",
+    "tags": [
+      "acronym",
+      "code_mixed",
+      "generated_extra_spaces"
+    ]
+  },
+  {
+    "query": "!! enbc परिचय ??",
+    "expected_group_id": "essential-newborn-care",
+    "tags": [
+      "acronym",
+      "code_mixed",
+      "generated_punctuation"
+    ]
+  },
+  {
+    "query": "show me a course about enbc परिचय",
+    "expected_group_id": "essential-newborn-care",
+    "tags": [
+      "acronym",
+      "code_mixed",
+      "generated_nlp"
+    ]
+  },
+  {
+    "query": "essential newborn care protocol",
+    "expected_group_id": "essential-newborn-care",
+    "tags": [
+      "english_alias"
+    ]
+  },
+  {
+    "query": "   essential   newborn   care   protocol   ",
+    "expected_group_id": "essential-newborn-care",
+    "tags": [
+      "english_alias",
+      "generated_extra_spaces"
+    ]
+  },
+  {
+    "query": "!! essential newborn care protocol ??",
+    "expected_group_id": "essential-newborn-care",
+    "tags": [
+      "english_alias",
+      "generated_punctuation"
+    ]
+  },
+  {
+    "query": "show me a course about essential newborn care protocol",
+    "expected_group_id": "essential-newborn-care",
+    "tags": [
+      "english_alias",
+      "generated_nlp"
+    ]
+  },
+  {
+    "query": "ESSENTIAL NEWBORN CARE PROTOCOL",
+    "expected_group_id": "essential-newborn-care",
+    "tags": [
+      "english_alias",
+      "generated_uppercase"
+    ]
+  },
+  {
+    "query": "essentialnewborncareprotocol",
+    "expected_group_id": "essential-newborn-care",
+    "tags": [
+      "english_alias",
+      "generated_no_space"
+    ]
+  },
+  {
+    "query": "newborn condition evaluation enbc",
+    "expected_group_id": "essential-newborn-care",
+    "tags": [
+      "english_alias",
+      "word_order"
+    ]
+  },
+  {
+    "query": "   newborn   condition   evaluation   enbc   ",
+    "expected_group_id": "essential-newborn-care",
+    "tags": [
+      "english_alias",
+      "word_order",
+      "generated_extra_spaces"
+    ]
+  },
+  {
+    "query": "!! newborn condition evaluation enbc ??",
+    "expected_group_id": "essential-newborn-care",
+    "tags": [
+      "english_alias",
+      "word_order",
+      "generated_punctuation"
+    ]
+  },
+  {
+    "query": "show me a course about newborn condition evaluation enbc",
+    "expected_group_id": "essential-newborn-care",
+    "tags": [
+      "english_alias",
+      "word_order",
+      "generated_nlp"
+    ]
+  },
+  {
+    "query": "NEWBORN CONDITION EVALUATION ENBC",
+    "expected_group_id": "essential-newborn-care",
+    "tags": [
+      "english_alias",
+      "word_order",
+      "generated_uppercase"
+    ]
+  },
+  {
+    "query": "newbornconditionevaluationenbc",
+    "expected_group_id": "essential-newborn-care",
+    "tags": [
+      "english_alias",
+      "word_order",
+      "generated_no_space"
+    ]
+  },
+  {
+    "query": "alpac counselling",
+    "expected_group_id": "effective-counselling",
+    "tags": [
+      "acronym"
+    ]
+  },
+  {
+    "query": "   alpac   counselling   ",
+    "expected_group_id": "effective-counselling",
+    "tags": [
+      "acronym",
+      "generated_extra_spaces"
+    ]
+  },
+  {
+    "query": "!! alpac counselling ??",
+    "expected_group_id": "effective-counselling",
+    "tags": [
+      "acronym",
+      "generated_punctuation"
+    ]
+  },
+  {
+    "query": "show me a course about alpac counselling",
+    "expected_group_id": "effective-counselling",
+    "tags": [
+      "acronym",
+      "generated_nlp"
+    ]
+  },
+  {
+    "query": "ALPAC COUNSELLING",
+    "expected_group_id": "effective-counselling",
+    "tags": [
+      "acronym",
+      "generated_uppercase"
+    ]
+  },
+  {
+    "query": "alpaccounselling",
+    "expected_group_id": "effective-counselling",
+    "tags": [
+      "acronym",
+      "generated_no_space"
+    ]
+  },
+  {
+    "query": "breastfeeding counselling protocol",
+    "expected_group_id": "breastfeeding-counselling",
+    "tags": [
+      "exact_topic"
+    ]
+  },
+  {
+    "query": "   breastfeeding   counselling   protocol   ",
+    "expected_group_id": "breastfeeding-counselling",
+    "tags": [
+      "exact_topic",
+      "generated_extra_spaces"
+    ]
+  },
+  {
+    "query": "!! breastfeeding counselling protocol ??",
+    "expected_group_id": "breastfeeding-counselling",
+    "tags": [
+      "exact_topic",
+      "generated_punctuation"
+    ]
+  },
+  {
+    "query": "show me a course about breastfeeding counselling protocol",
+    "expected_group_id": "breastfeeding-counselling",
+    "tags": [
+      "exact_topic",
+      "generated_nlp"
+    ]
+  },
+  {
+    "query": "BREASTFEEDING COUNSELLING PROTOCOL",
+    "expected_group_id": "breastfeeding-counselling",
+    "tags": [
+      "exact_topic",
+      "generated_uppercase"
+    ]
+  },
+  {
+    "query": "breastfeedingcounsellingprotocol",
+    "expected_group_id": "breastfeeding-counselling",
+    "tags": [
+      "exact_topic",
+      "generated_no_space"
+    ]
+  },
+  {
+    "query": "counsel client breastfeeding assessment",
+    "expected_group_id": "breastfeeding-counselling",
+    "tags": [
+      "word_order"
+    ]
+  },
+  {
+    "query": "   counsel   client   breastfeeding   assessment   ",
+    "expected_group_id": "breastfeeding-counselling",
+    "tags": [
+      "word_order",
+      "generated_extra_spaces"
+    ]
+  },
+  {
+    "query": "!! counsel client breastfeeding assessment ??",
+    "expected_group_id": "breastfeeding-counselling",
+    "tags": [
+      "word_order",
+      "generated_punctuation"
+    ]
+  },
+  {
+    "query": "show me a course about counsel client breastfeeding assessment",
+    "expected_group_id": "breastfeeding-counselling",
+    "tags": [
+      "word_order",
+      "generated_nlp"
+    ]
+  },
+  {
+    "query": "COUNSEL CLIENT BREASTFEEDING ASSESSMENT",
+    "expected_group_id": "breastfeeding-counselling",
+    "tags": [
+      "word_order",
+      "generated_uppercase"
+    ]
+  },
+  {
+    "query": "counselclientbreastfeedingassessment",
+    "expected_group_id": "breastfeeding-counselling",
+    "tags": [
+      "word_order",
+      "generated_no_space"
+    ]
+  },
+  {
+    "query": "newborn danger signs",
+    "expected_group_id": "newborn-danger-signs",
+    "tags": [
+      "exact_topic"
+    ]
+  },
+  {
+    "query": "   newborn   danger   signs   ",
+    "expected_group_id": "newborn-danger-signs",
+    "tags": [
+      "exact_topic",
+      "generated_extra_spaces"
+    ]
+  },
+  {
+    "query": "!! newborn danger signs ??",
+    "expected_group_id": "newborn-danger-signs",
+    "tags": [
+      "exact_topic",
+      "generated_punctuation"
+    ]
+  },
+  {
+    "query": "show me a course about newborn danger signs",
+    "expected_group_id": "newborn-danger-signs",
+    "tags": [
+      "exact_topic",
+      "generated_nlp"
+    ]
+  },
+  {
+    "query": "NEWBORN DANGER SIGNS",
+    "expected_group_id": "newborn-danger-signs",
+    "tags": [
+      "exact_topic",
+      "generated_uppercase"
+    ]
+  },
+  {
+    "query": "newborndangersigns",
+    "expected_group_id": "newborn-danger-signs",
+    "tags": [
+      "exact_topic",
+      "generated_no_space"
+    ]
+  },
+  {
+    "query": "eclampsia management",
+    "expected_group_id": "eclampsia",
+    "tags": [
+      "exact_topic"
+    ]
+  },
+  {
+    "query": "   eclampsia   management   ",
+    "expected_group_id": "eclampsia",
+    "tags": [
+      "exact_topic",
+      "generated_extra_spaces"
+    ]
+  },
+  {
+    "query": "!! eclampsia management ??",
+    "expected_group_id": "eclampsia",
+    "tags": [
+      "exact_topic",
+      "generated_punctuation"
+    ]
+  },
+  {
+    "query": "show me a course about eclampsia management",
+    "expected_group_id": "eclampsia",
+    "tags": [
+      "exact_topic",
+      "generated_nlp"
+    ]
+  },
+  {
+    "query": "ECLAMPSIA MANAGEMENT",
+    "expected_group_id": "eclampsia",
+    "tags": [
+      "exact_topic",
+      "generated_uppercase"
+    ]
+  },
+  {
+    "query": "eclampsiamanagement",
+    "expected_group_id": "eclampsia",
+    "tags": [
+      "exact_topic",
+      "generated_no_space"
+    ]
+  },
+  {
+    "query": "partograph danger signs",
+    "expected_group_id": "partograph",
+    "tags": [
+      "exact_topic"
+    ]
+  },
+  {
+    "query": "   partograph   danger   signs   ",
+    "expected_group_id": "partograph",
+    "tags": [
+      "exact_topic",
+      "generated_extra_spaces"
+    ]
+  },
+  {
+    "query": "!! partograph danger signs ??",
+    "expected_group_id": "partograph",
+    "tags": [
+      "exact_topic",
+      "generated_punctuation"
+    ]
+  },
+  {
+    "query": "show me a course about partograph danger signs",
+    "expected_group_id": "partograph",
+    "tags": [
+      "exact_topic",
+      "generated_nlp"
+    ]
+  },
+  {
+    "query": "PARTOGRAPH DANGER SIGNS",
+    "expected_group_id": "partograph",
+    "tags": [
+      "exact_topic",
+      "generated_uppercase"
+    ]
+  },
+  {
+    "query": "partographdangersigns",
+    "expected_group_id": "partograph",
+    "tags": [
+      "exact_topic",
+      "generated_no_space"
+    ]
+  },
+  {
+    "query": "neonatal resuscitation",
+    "expected_group_id": "neonatal-resuscitation",
+    "tags": [
+      "exact_topic"
+    ]
+  },
+  {
+    "query": "   neonatal   resuscitation   ",
+    "expected_group_id": "neonatal-resuscitation",
+    "tags": [
+      "exact_topic",
+      "generated_extra_spaces"
+    ]
+  },
+  {
+    "query": "!! neonatal resuscitation ??",
+    "expected_group_id": "neonatal-resuscitation",
+    "tags": [
+      "exact_topic",
+      "generated_punctuation"
+    ]
+  },
+  {
+    "query": "show me a course about neonatal resuscitation",
+    "expected_group_id": "neonatal-resuscitation",
+    "tags": [
+      "exact_topic",
+      "generated_nlp"
+    ]
+  },
+  {
+    "query": "NEONATAL RESUSCITATION",
+    "expected_group_id": "neonatal-resuscitation",
+    "tags": [
+      "exact_topic",
+      "generated_uppercase"
+    ]
+  },
+  {
+    "query": "neonatalresuscitation",
+    "expected_group_id": "neonatal-resuscitation",
+    "tags": [
+      "exact_topic",
+      "generated_no_space"
+    ]
+  },
+  {
+    "query": "lbw newborns",
+    "expected_group_id": "low-birth-weight-newborns",
+    "tags": [
+      "acronym"
+    ]
+  },
+  {
+    "query": "   lbw   newborns   ",
+    "expected_group_id": "low-birth-weight-newborns",
+    "tags": [
+      "acronym",
+      "generated_extra_spaces"
+    ]
+  },
+  {
+    "query": "!! lbw newborns ??",
+    "expected_group_id": "low-birth-weight-newborns",
+    "tags": [
+      "acronym",
+      "generated_punctuation"
+    ]
+  },
+  {
+    "query": "show me a course about lbw newborns",
+    "expected_group_id": "low-birth-weight-newborns",
+    "tags": [
+      "acronym",
+      "generated_nlp"
+    ]
+  },
+  {
+    "query": "LBW NEWBORNS",
+    "expected_group_id": "low-birth-weight-newborns",
+    "tags": [
+      "acronym",
+      "generated_uppercase"
+    ]
+  },
+  {
+    "query": "lbwnewborns",
+    "expected_group_id": "low-birth-weight-newborns",
+    "tags": [
+      "acronym",
+      "generated_no_space"
+    ]
+  },
+  {
+    "query": "   normal   delivery   ",
+    "expected_group_id": "normal-delivery",
+    "tags": [
+      "extra_spaces"
+    ]
+  },
+  {
+    "query": "!!    normal   delivery    ??",
+    "expected_group_id": "normal-delivery",
+    "tags": [
+      "extra_spaces",
+      "generated_punctuation"
+    ]
+  },
+  {
+    "query": "show me a course about    normal   delivery   ",
+    "expected_group_id": "normal-delivery",
+    "tags": [
+      "extra_spaces",
+      "generated_nlp"
+    ]
+  },
+  {
+    "query": "   NORMAL   DELIVERY   ",
+    "expected_group_id": "normal-delivery",
+    "tags": [
+      "extra_spaces",
+      "generated_uppercase"
+    ]
+  },
+  {
+    "query": "normaldelivery",
+    "expected_group_id": "normal-delivery",
+    "tags": [
+      "extra_spaces",
+      "generated_no_space"
+    ]
+  },
+  {
+    "query": "PPHHH primary management",
+    "expected_group_id": "postpartum-hemorrhage",
+    "tags": [
+      "repeated_letters",
+      "typo"
+    ]
+  },
+  {
+    "query": "   PPHHH   primary   management   ",
+    "expected_group_id": "postpartum-hemorrhage",
+    "tags": [
+      "repeated_letters",
+      "typo",
+      "generated_extra_spaces"
+    ]
+  },
+  {
+    "query": "!! PPHHH primary management ??",
+    "expected_group_id": "postpartum-hemorrhage",
+    "tags": [
+      "repeated_letters",
+      "typo",
+      "generated_punctuation"
+    ]
+  },
+  {
+    "query": "show me a course about PPHHH primary management",
+    "expected_group_id": "postpartum-hemorrhage",
+    "tags": [
+      "repeated_letters",
+      "typo",
+      "generated_nlp"
+    ]
+  },
+  {
+    "query": "PPHHH PRIMARY MANAGEMENT",
+    "expected_group_id": "postpartum-hemorrhage",
+    "tags": [
+      "repeated_letters",
+      "typo",
+      "generated_uppercase"
+    ]
+  },
+  {
+    "query": "PPHHHprimarymanagement",
+    "expected_group_id": "postpartum-hemorrhage",
+    "tags": [
+      "repeated_letters",
+      "typo",
+      "generated_no_space"
+    ]
+  },
+  {
+    "query": "!! respectfulmaternitycare ??",
+    "expected_group_id": "respectful-maternity-care",
+    "tags": [
+      "no_space",
+      "generated_punctuation"
+    ]
+  },
+  {
+    "query": "show me a course about respectfulmaternitycare",
+    "expected_group_id": "respectful-maternity-care",
+    "tags": [
+      "no_space",
+      "generated_nlp"
+    ]
+  },
+  {
+    "query": "RESPECTFULMATERNITYCARE",
+    "expected_group_id": "respectful-maternity-care",
+    "tags": [
+      "no_space",
+      "generated_uppercase"
+    ]
+  },
+  {
+    "query": "I need a Hindi course on family planning and lam",
+    "expected_group_id": "family-planning-lam",
+    "tags": [
+      "nlp",
+      "language_preference"
+    ],
+    "preferred_language": "Hindi"
+  },
+  {
+    "query": "   I   need   a   Hindi   course   on   family   planning   and   lam   ",
+    "expected_group_id": "family-planning-lam",
+    "tags": [
+      "nlp",
+      "language_preference",
+      "generated_extra_spaces"
+    ],
+    "preferred_language": "Hindi"
+  },
+  {
+    "query": "!! I need a Hindi course on family planning and lam ??",
+    "expected_group_id": "family-planning-lam",
+    "tags": [
+      "nlp",
+      "language_preference",
+      "generated_punctuation"
+    ],
+    "preferred_language": "Hindi"
+  },
+  {
+    "query": "show me a course about I need a Hindi course on family planning and lam",
+    "expected_group_id": "family-planning-lam",
+    "tags": [
+      "nlp",
+      "language_preference",
+      "generated_nlp"
+    ],
+    "preferred_language": "Hindi"
+  },
+  {
+    "query": "I NEED A HINDI COURSE ON FAMILY PLANNING AND LAM",
+    "expected_group_id": "family-planning-lam",
+    "tags": [
+      "nlp",
+      "language_preference",
+      "generated_uppercase"
+    ],
+    "preferred_language": "Hindi"
+  },
+  {
+    "query": "IneedaHindicourseonfamilyplanningandlam",
+    "expected_group_id": "family-planning-lam",
+    "tags": [
+      "nlp",
+      "language_preference",
+      "generated_no_space"
+    ],
+    "preferred_language": "Hindi"
+  },
+  {
+    "query": "um pph ka assessment please",
+    "expected_group_id": "postpartum-hemorrhage",
+    "tags": [
+      "voice_style",
+      "code_mixed"
+    ]
+  },
+  {
+    "query": "   um   pph   ka   assessment   please   ",
+    "expected_group_id": "postpartum-hemorrhage",
+    "tags": [
+      "voice_style",
+      "code_mixed",
+      "generated_extra_spaces"
+    ]
+  },
+  {
+    "query": "!! um pph ka assessment please ??",
+    "expected_group_id": "postpartum-hemorrhage",
+    "tags": [
+      "voice_style",
+      "code_mixed",
+      "generated_punctuation"
+    ]
+  },
+  {
+    "query": "show me a course about um pph ka assessment please",
+    "expected_group_id": "postpartum-hemorrhage",
+    "tags": [
+      "voice_style",
+      "code_mixed",
+      "generated_nlp"
+    ]
+  },
+  {
+    "query": "UM PPH KA ASSESSMENT PLEASE",
+    "expected_group_id": "postpartum-hemorrhage",
+    "tags": [
+      "voice_style",
+      "code_mixed",
+      "generated_uppercase"
+    ]
+  },
+  {
+    "query": "umpphkaassessmentplease",
+    "expected_group_id": "postpartum-hemorrhage",
+    "tags": [
+      "voice_style",
+      "code_mixed",
+      "generated_no_space"
+    ]
+  },
+  {
+    "query": "stage 4 monitoring mother newborn",
+    "expected_group_id": "stage4-monitoring-danger-signs",
+    "tags": [
+      "competency"
+    ]
+  },
+  {
+    "query": "   stage   4   monitoring   mother   newborn   ",
+    "expected_group_id": "stage4-monitoring-danger-signs",
+    "tags": [
+      "competency",
+      "generated_extra_spaces"
+    ]
+  },
+  {
+    "query": "!! stage 4 monitoring mother newborn ??",
+    "expected_group_id": "stage4-monitoring-danger-signs",
+    "tags": [
+      "competency",
+      "generated_punctuation"
+    ]
+  },
+  {
+    "query": "show me a course about stage 4 monitoring mother newborn",
+    "expected_group_id": "stage4-monitoring-danger-signs",
+    "tags": [
+      "competency",
+      "generated_nlp"
+    ]
+  },
+  {
+    "query": "STAGE 4 MONITORING MOTHER NEWBORN",
+    "expected_group_id": "stage4-monitoring-danger-signs",
+    "tags": [
+      "competency",
+      "generated_uppercase"
+    ]
+  },
+  {
+    "query": "stage4monitoringmothernewborn",
+    "expected_group_id": "stage4-monitoring-danger-signs",
+    "tags": [
+      "competency",
+      "generated_no_space"
+    ]
+  },
+  {
+    "query": "level 5 postpartum hemorrhage",
+    "expected_group_id": "postpartum-hemorrhage",
+    "tags": [
+      "level_query"
+    ]
+  },
+  {
+    "query": "   level   5   postpartum   hemorrhage   ",
+    "expected_group_id": "postpartum-hemorrhage",
+    "tags": [
+      "level_query",
+      "generated_extra_spaces"
+    ]
+  },
+  {
+    "query": "!! level 5 postpartum hemorrhage ??",
+    "expected_group_id": "postpartum-hemorrhage",
+    "tags": [
+      "level_query",
+      "generated_punctuation"
+    ]
+  },
+  {
+    "query": "show me a course about level 5 postpartum hemorrhage",
+    "expected_group_id": "postpartum-hemorrhage",
+    "tags": [
+      "level_query",
+      "generated_nlp"
+    ]
+  },
+  {
+    "query": "LEVEL 5 POSTPARTUM HEMORRHAGE",
+    "expected_group_id": "postpartum-hemorrhage",
+    "tags": [
+      "level_query",
+      "generated_uppercase"
+    ]
+  },
+  {
+    "query": "level5postpartumhemorrhage",
+    "expected_group_id": "postpartum-hemorrhage",
+    "tags": [
+      "level_query",
+      "generated_no_space"
+    ]
+  },
+  {
+    "query": "quantum astrophysics for toddlers",
+    "expected_no_results": true,
+    "tags": [
+      "negative_query"
+    ]
+  },
+  {
+    "query": "best pizza near airport",
+    "expected_no_results": true,
+    "tags": [
+      "negative_query"
+    ]
+  },
+  {
+    "query": "javascript event loop tutorial",
+    "expected_no_results": true,
+    "tags": [
+      "negative_query"
+    ]
+  },
+  {
+    "query": "amazon return policy",
+    "expected_no_results": true,
+    "tags": [
+      "negative_query"
+    ]
+  },
+  {
+    "query": "bollywood latest trailer",
+    "expected_no_results": true,
+    "tags": [
+      "negative_query"
+    ]
+  },
+  {
+    "query": "football live score",
+    "expected_no_results": true,
+    "tags": [
+      "negative_query"
+    ]
+  },
+  {
+    "query": "how to build drone engine",
+    "expected_no_results": true,
+    "tags": [
+      "negative_query"
+    ]
+  },
+  {
+    "query": "cryptocurrency staking basics",
+    "expected_no_results": true,
+    "tags": [
+      "negative_query"
+    ]
+  },
+  {
+    "query": "advanced kubernetes cluster tuning",
+    "expected_no_results": true,
+    "tags": [
+      "negative_query"
+    ]
+  },
+  {
+    "query": "guitar chord progressions",
+    "expected_no_results": true,
+    "tags": [
+      "negative_query"
+    ]
+  },
+  {
+    "query": "movie recommendation for horror fans",
+    "expected_no_results": true,
+    "tags": [
+      "negative_query"
+    ]
+  },
+  {
+    "query": "real estate tax planning",
+    "expected_no_results": true,
+    "tags": [
+      "negative_query"
+    ]
+  },
+  {
+    "query": "python dataframe merge examples",
+    "expected_no_results": true,
+    "tags": [
+      "negative_query"
+    ]
+  },
+  {
+    "query": "vacation packing checklist",
+    "expected_no_results": true,
+    "tags": [
+      "negative_query"
+    ]
+  },
+  {
+    "query": "wireless router setup",
+    "expected_no_results": true,
+    "tags": [
+      "negative_query"
+    ]
+  },
+  {
+    "query": "photoshop layer masking",
+    "expected_no_results": true,
+    "tags": [
+      "negative_query"
+    ]
+  },
+  {
+    "query": "gaming laptop benchmark",
+    "expected_no_results": true,
+    "tags": [
+      "negative_query"
+    ]
+  },
+  {
+    "query": "air fryer recipes",
+    "expected_no_results": true,
+    "tags": [
+      "negative_query"
+    ]
+  },
+  {
+    "query": "car insurance premium comparison",
+    "expected_no_results": true,
+    "tags": [
+      "negative_query"
+    ]
+  },
+  {
+    "query": "graphic design portfolio tips",
+    "expected_no_results": true,
+    "tags": [
+      "negative_query"
+    ]
+  }
+]

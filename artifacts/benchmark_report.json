@@ -1,0 +1,136 @@
+{
+  "generated_at": "2026-04-11T17:35:12.853931+00:00",
+  "positive_total": 252,
+  "negative_total": 20,
+  "top1_hits": 250,
+  "top3_hits": 252,
+  "negative_passes": 20,
+  "per_tag": {
+    "exact_title": {
+      "count": 8,
+      "top1": 8,
+      "top3": 8
+    },
+    "hindi_script": {
+      "count": 8,
+      "top1": 8,
+      "top3": 8
+    },
+    "generated_extra_spaces": {
+      "count": 42,
+      "top1": 42,
+      "top3": 42
+    },
+    "generated_punctuation": {
+      "count": 44,
+      "top1": 44,
+      "top3": 44
+    },
+    "generated_nlp": {
+      "count": 44,
+      "top1": 44,
+      "top3": 44
+    },
+    "acronym": {
+      "count": 58,
+      "top1": 58,
+      "top3": 58
+    },
+    "romanized_hindi": {
+      "count": 42,
+      "top1": 42,
+      "top3": 42
+    },
+    "generated_uppercase": {
+      "count": 40,
+      "top1": 40,
+      "top3": 40
+    },
+    "generated_no_space": {
+      "count": 39,
+      "top1": 37,
+      "top3": 39
+    },
+    "english_alias": {
+      "count": 60,
+      "top1": 59,
+      "top3": 60
+    },
+    "word_order": {
+      "count": 30,
+      "top1": 29,
+      "top3": 30
+    },
+    "nlp": {
+      "count": 12,
+      "top1": 12,
+      "top3": 12
+    },
+    "exact_topic": {
+      "count": 42,
+      "top1": 42,
+      "top3": 42
+    },
+    "typo": {
+      "count": 12,
+      "top1": 12,
+      "top3": 12
+    },
+    "mixed_intent": {
+      "count": 6,
+      "top1": 6,
+      "top3": 6
+    },
+    "code_mixed": {
+      "count": 20,
+      "top1": 20,
+      "top3": 20
+    },
+    "prefix": {
+      "count": 6,
+      "top1": 6,
+      "top3": 6
+    },
+    "extra_spaces": {
+      "count": 5,
+      "top1": 5,
+      "top3": 5
+    },
+    "repeated_letters": {
+      "count": 6,
+      "top1": 6,
+      "top3": 6
+    },
+    "no_space": {
+      "count": 3,
+      "top1": 3,
+      "top3": 3
+    },
+    "language_preference": {
+      "count": 6,
+      "top1": 6,
+      "top3": 6
+    },
+    "voice_style": {
+      "count": 6,
+      "top1": 6,
+      "top3": 6
+    },
+    "competency": {
+      "count": 6,
+      "top1": 6,
+      "top3": 6
+    },
+    "level_query": {
+      "count": 6,
+      "top1": 5,
+      "top3": 6
+    },
+    "negative_query": {
+      "count": 20,
+      "top1": 20,
+      "top3": 20
+    }
+  },
+  "failures": []
+}
