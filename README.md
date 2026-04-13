@@ -1,8 +1,10 @@
-# Aastrika Sphere
+# Search Optimisation
 
-Aastrika Sphere is a compact intelligent search backend for healthcare course discovery. The surface area is intentionally small: one FastAPI service, one lightweight verification UI, and one local in-memory backend for development. The interesting work is in the retrieval pipeline itself: query normalization, typo repair, transliteration support, hybrid ranking, phonetic rescue, and practical optimization choices for noisy real-world course search.
+Search Optimisation is a focused search systems project for healthcare course discovery, built around the idea that a small retrieval stack can still be technically strong if the query understanding, ranking logic, and evaluation discipline are done properly. The repository keeps the product surface deliberately compact, but the internals are not trivial: normalization, typo repair, transliteration, code-mixed handling, hybrid scoring, phonetic rescue, semantic fallback, and thresholding decisions are all tuned toward practical retrieval quality rather than feature sprawl.
 
-It should be read as a focused search systems project, not as a massive platform.
+Part of this work was done for an internship at Aastrika Sphere, a maternity and midwifery nonprofit.
+
+It should be read as a compact but serious retrieval engineering project, not as an attempt to market a large platform.
 
 ## Why This Is Interesting
 
@@ -10,6 +12,19 @@ It should be read as a focused search systems project, not as a massive platform
 - It combines lexical BM25-style matching, fuzzy repair, phonetic matching, and semantic rescue behind a clean REST API.
 - It keeps the implementation small enough to inspect end-to-end while still exposing indexing, suggestions, health checks, analytics hooks, and voice-search seams.
 - It is designed to be called from a Java service over HTTP without coupling runtimes or storage layers.
+
+## System Character
+
+The point of the project is not that it contains an enormous amount of infrastructure. The point is that it applies a sequence of search optimisation ideas in a coherent way:
+
+- aggressive query cleanup before retrieval
+- multiple repair paths for user-input noise
+- domain-aware language and transliteration handling
+- hybrid evidence accumulation instead of single-score ranking
+- rescue logic for difficult queries
+- measurable evaluation instead of anecdotal demos
+
+That makes it a stronger engineering exercise than a basic CRUD-backed search API, even though the repository remains intentionally approachable.
 
 ## Retrieval Pipeline
 
@@ -21,6 +36,19 @@ It should be read as a focused search systems project, not as a massive platform
 6. Enrich the response: explanations, grouped variants, facets, alternate queries, no-result guidance, debug payloads.
 
 This is implemented primarily in [app/search/query_processor.py](app/search/query_processor.py), [app/search/backend.py](app/search/backend.py), and [app/services/search_service.py](app/services/search_service.py).
+
+## Algorithms And Optimisation Ideas
+
+- BM25-style lexical scoring over both title and broader course content, with title-specific evidence separated from body evidence.
+- Token-level and whole-query fuzzy repair using confidence thresholds rather than unconditional autocorrect.
+- Compact-query segmentation and no-space recovery for inputs that collapse multiple terms together.
+- Indic transliteration expansion so romanized queries can recover Hindi catalog items.
+- Phonetic rescue using Soundex-style overlap when lexical matching is not enough.
+- Semantic similarity as an additional retrieval signal, with a local fallback path when the transformer model is unavailable.
+- Weighted reranking that combines lexical, fuzzy, phrase, semantic, phonetic, popularity, recency, and language-preference signals.
+- Confidence estimation and rescue thresholds to control when imperfect matches should still surface.
+- Deduplication by course group so multilingual variants do not dominate top results.
+- Faceting, alternates, and no-result guidance to make the API behavior usable after ranking, not just during ranking.
 
 ## Benchmark Snapshot
 
@@ -35,6 +63,8 @@ The evaluation set includes exact-title, acronym, typo, no-space, romanized Hind
 Current local test run:
 
 - `27 passed, 1 skipped`
+
+What matters here is not just the headline accuracy. The benchmark covers several failure modes that usually break simplistic catalog search: acronyms, spacing noise, transliterated inputs, query reformulation, and negative queries that should return nothing useful.
 
 ## Demo UI
 
@@ -90,6 +120,10 @@ The API contract is documented in [docs/api_contract.md](docs/api_contract.md).
 - Operational controls: auth middleware, rate limiting, structured error envelopes, analytics logging.
 
 This is a practical prototype with real retrieval logic, not a claim of web-scale search or fully validated production readiness.
+
+## Maturity Statement
+
+This repository is best described as a well-scoped search optimisation project with a credible backend implementation, a modest verification UI, and measurable retrieval evidence. It is not a claim of enterprise-scale infrastructure, but it does demonstrate sound understanding of ranking design, NLP-driven query handling, fallback strategies, and evaluation-oriented backend engineering.
 
 ## Project Layout
 

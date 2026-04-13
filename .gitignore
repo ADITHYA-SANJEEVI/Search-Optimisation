@@ -2,8 +2,6 @@
 .venv/
 __pycache__/
 *.py[cod]
-*.pyo
-*.pyd
 *.egg-info/
 .pytest_cache/
 .mypy_cache/
@@ -13,20 +11,18 @@ __pycache__/
 .cache/
 .sixth/
 
-# Local runtime data
+# Runtime outputs
 data/*.db
 artifacts/test_tmp/
-artifacts/*.log
+artifacts/demo-server*.log
 
-# Temporary test/work directories
+# Temporary local test directories
 .pytest_tmp/
 pytest_tmp/
 manual_pytest_tmp/
 manual_pytest_tmp_run*/
 pytest-cache-files-*/
 
-# OS/editor noise
+# OS noise
 .DS_Store
 Thumbs.db
-*.tmp
-*.temp
