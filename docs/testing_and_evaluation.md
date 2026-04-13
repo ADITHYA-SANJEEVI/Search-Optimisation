@@ -67,8 +67,3 @@ The API supports:
 - deterministic mock transcription for local/demo verification
 - a `faster-whisper` integration path for real STT
 
-This repository does not currently claim broad real-world audio validation across accents, languages, or noisy environments.
-
-## Honest interpretation
-
-The current evaluation evidence is strong for a domain-focused backend prototype and demo submission. It is enough to support claims around tested and benchmarked hybrid retrieval, but it should not be overstated as universal or web-scale validation.
