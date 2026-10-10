@@ -21,8 +21,14 @@ In a second terminal:
 $env:SPHERE_PUBLIC_SEARCH_URL='https://sphere.aastrika.org/apis/public/v8/publicContent/v1/search'
 .\.venv\Scripts\python.exe scripts/validate_sphere_live.py
 node --experimental-strip-types integration/ui-proxy/liveAcceptance.mjs
+$env:SEARCH_BACKEND='inmemory'
+$env:BOOTSTRAP_SAMPLE_DATA='true'
+$env:AUTH_ENABLED='false'
+$env:RATE_LIMIT_ENABLED='false'
+$env:SEMANTIC_MODEL_ALLOW_DOWNLOAD='false'
+$env:ENABLE_DEBUG_PAYLOADS='true'
 $env:RUN_OPENSEARCH_INTEGRATION='1'
-.\.venv\Scripts\python.exe -m pytest -q -rA --junitxml=artifacts/final_pytest.xml
+.\.venv\Scripts\python.exe -m pytest -q -rA --junitxml=artifacts/release_pytest.xml
 node --experimental-strip-types --test integration/ui-proxy/advancedSearch.test.mjs
 .\.venv\Scripts\python.exe scripts/run_benchmark.py
 ```

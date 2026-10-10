@@ -1,4 +1,4 @@
-# Current status ? 7 October 2026
+# Current status - 11 October 2026
 
 COMPLETE WITH EXTERNAL DEPLOYMENT BLOCKERS.
 
@@ -10,6 +10,6 @@ Validation: 90 Python tests passed with RUN_OPENSEARCH_INTEGRATION=1, zero failu
 
 The actual upstream proxy repository was not modified. `integration/ui-proxy/publicSearch.patch` applies to the inspected upstream snapshot and its exact companion passed local contract and real-record hydration tests. Kong configuration is ready but not onboarded. Production deployment, scheduling, upstream build/merge, and environment-level acceptance remain external actions.
 
-No final commit was created: the starting dirty tree includes earlier ranking/catalogue changes mixed with demo branding, browser voice, presentation documentation, and launcher edits. This pass relies on some of those changes in shared files; staging everything would include unrelated work. All preexisting work is preserved; HEAD is unchanged and nothing was pushed.
+The completed workspace, including earlier ranking/catalogue, demo, browser voice, presentation, and launcher work, is preserved in the pushed `backup/advanced-search-pre-release` branch at `d69207e79a8349ac62f81598e0278bf447fe4d74`. The repository freeze uses `release/advanced-search-final` and annotated tag `advanced-search-integration-final`. See [REPOSITORY_FREEZE.md](REPOSITORY_FREEZE.md) for the current acceptance and publication record.
 
 See [FINAL_ADVANCED_SEARCH_INTEGRATION_EVIDENCE.md](FINAL_ADVANCED_SEARCH_INTEGRATION_EVIDENCE.md) for exact commands, counts, limitations, and changed files. Use [deployment.md](deployment.md) for real catalogue operations; `launch.ps1` is the sample presentation flow.

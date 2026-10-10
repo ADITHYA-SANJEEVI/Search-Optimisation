@@ -52,4 +52,3 @@ def test_existing_search_contract_remains_compatible(client) -> None:
     payload = response.json()
     assert payload["results"]
     assert "course_id" in payload["results"][0]
-

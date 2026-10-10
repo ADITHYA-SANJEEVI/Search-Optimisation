@@ -1,4 +1,6 @@
 .env
+.env.*
+!.env.example
 .venv/
 __pycache__/
 *.py[cod]
@@ -10,12 +12,23 @@ __pycache__/
 # Local caches and model downloads
 .cache/
 .sixth/
+.local-fixtures/
 
 # Runtime outputs
 data/*.db
 artifacts/test_tmp/
 artifacts/demo-server*.log
 artifacts/runtime/
+*.log
+*.pid
+opensearch-data/
+data/opensearch/
+
+# Local authentication material
+*.pem
+*.key
+credentials.json
+cookies.txt
 
 # Temporary local test directories
 .pytest_tmp/

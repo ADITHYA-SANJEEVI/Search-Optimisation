@@ -6,7 +6,7 @@ OpenSearch persists the transformed catalogue. The ranking pipeline scores the c
 
 See [API contract](docs/SPHERE_API_CONTRACT.md), [runbook](docs/deployment.md), [proxy handoff](docs/PRINCE_HANDOFF.md), and [final evidence](docs/FINAL_ADVANCED_SEARCH_INTEGRATION_EVIDENCE.md). The `/api/v1/search` full-record response is the separate existing demo/debug API; it is not the Sphere integration endpoint.
 
-The public catalogue sync was verified on 7 October 2026: 620 records across seven pages, 620 indexed, zero rejected. Incremental traversal observed 620 unchanged records and zero upserts. These are observed counts, not constants. Kong onboarding and the upstream UI proxy merge remain external actions.
+The public catalogue sync was verified on 7 October 2026: 620 records across seven pages, 620 indexed, zero rejected. Incremental traversal observed 620 unchanged records and zero upserts. These are observed counts, not constants. Repository-side integration is complete and local OpenSearch is verified. The proxy patch is ready, not merged; Kong configuration is ready, not deployed. Production deployment remains external. See the [repository freeze record](docs/REPOSITORY_FREEZE.md) for the backup branch, final release branch/tag, and current acceptance.
 
 # search_opt
 

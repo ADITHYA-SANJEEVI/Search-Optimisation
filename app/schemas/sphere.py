@@ -32,4 +32,3 @@ class SphereRequestTranslation(BaseModel):
     source_query_fields: dict[str, str | None]
     source_filters: dict[str, list[str]] = Field(default_factory=dict)
     source_sort: list[dict[str, Any]] = Field(default_factory=list)
-

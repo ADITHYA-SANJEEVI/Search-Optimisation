@@ -29,6 +29,6 @@ The companion receives only IDs/total, fetches public records by exact identifie
 
 ## Remaining external actions
 
-Review and merge the patch in the actual proxy repository; run upstream build and platform acceptance; onboard the Kong service/route; deploy the API and persistent index; schedule sync and coordinate API snapshot refresh/restart. There is no Java change. No remote push was performed.
+Review and merge the patch in the actual proxy repository; run upstream build and platform acceptance; onboard the Kong service/route; deploy the API and persistent index; schedule sync and coordinate API snapshot refresh/restart. There is no Java change. The completed repository workspace is preserved on the backup branch; release publication is recorded in [REPOSITORY_FREEZE.md](REPOSITORY_FREEZE.md).
 
 See [final evidence](FINAL_ADVANCED_SEARCH_INTEGRATION_EVIDENCE.md) for exact commands, test results, security checks, and repository state.

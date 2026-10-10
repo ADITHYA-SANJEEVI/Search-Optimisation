@@ -6,11 +6,11 @@ Repository-owned implementation and local acceptance are complete. No production
 
 # Repository / branch
 
-`C:\Users\adith\OneDrive\Desktop\aastrika`; `feature/sphere-contract-adapter-local-20260930-1652`. Starting HEAD: `b2ba79fb4b8a9b1185442753100ae8e75948e6a3`. Starting working tree was dirty, with catalogue/ranking enhancements mixed with earlier presentation, branding, browser-voice, and launcher edits. Initial inspection mapping is in `INTEGRATION_GAPS.md`.
+Repository root; historical implementation branch `feature/sphere-contract-adapter-local-20260930-1652`. Starting HEAD: `b2ba79fb4b8a9b1185442753100ae8e75948e6a3`. Starting working tree was dirty, with catalogue/ranking enhancements mixed with earlier presentation, branding, browser-voice, and launcher edits. Initial inspection mapping is in `INTEGRATION_GAPS.md`.
 
 # Final commit SHA
 
-No final commit. HEAD remains `b2ba79fb4b8a9b1185442753100ae8e75948e6a3`. The changes depend on prior edits in shared files; an atomic stage of the entire dirty tree would include unrelated work. Existing changes were preserved, nothing staged or discarded, no history rewritten, no remote push.
+The 11 October 2026 repository freeze preserves all meaningful workspace changes in `backup/advanced-search-pre-release` at `d69207e79a8349ac62f81598e0278bf447fe4d74`, pushed to origin. The final branch is `release/advanced-search-final`; the annotated release tag is `advanced-search-integration-final`. Resolve the final SHA with `git rev-parse "advanced-search-integration-final^{commit}"`. See [REPOSITORY_FREEZE.md](REPOSITORY_FREEZE.md) for the current acceptance, hygiene, and publication record. The test and live-sync sections below retain the 7 October implementation evidence.
 
 # Architecture implemented
 
@@ -185,7 +185,7 @@ All workspace changes relative to starting HEAD are listed below, including pres
 
 # Remaining external actions
 
-Review/merge/build the exact patch in the actual Node proxy repository; onboard the Kong route/service with environment policies; deploy the API/index; schedule sync and coordinate snapshot refresh; execute platform traffic acceptance. No remote push was performed.
+Review/merge/build the exact patch in the actual Node proxy repository; onboard the Kong route/service with environment policies; deploy the API/index; schedule sync and coordinate snapshot refresh; execute platform traffic acceptance. Repository publication is tracked in [REPOSITORY_FREEZE.md](REPOSITORY_FREEZE.md).
 
 # Limitations
 

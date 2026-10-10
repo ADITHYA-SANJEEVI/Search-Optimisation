@@ -1,11 +1,25 @@
 # Testing and evaluation
 
+The 11 October repository freeze runs this acceptance once more, retaining the
+7 October evidence below. Current Python output is `artifacts/release_pytest.xml`;
+the current summary is [REPOSITORY_FREEZE.md](REPOSITORY_FREEZE.md). The historical
+`final_pytest.xml`, focused health report, sync reports, and live acceptance reports
+remain intact. No new full public catalogue sync is required for publication.
+
 Final acceptance uses a running local OpenSearch node and explicitly enables infrastructure coverage:
 
 ```powershell
 docker compose up -d opensearch
+# Wait until `docker compose ps` reports OpenSearch healthy.
+# Use the sample backend for ordinary tests; opt-in tests create isolated indexes.
+$env:SEARCH_BACKEND='inmemory'
+$env:BOOTSTRAP_SAMPLE_DATA='true'
+$env:AUTH_ENABLED='false'
+$env:RATE_LIMIT_ENABLED='false'
+$env:SEMANTIC_MODEL_ALLOW_DOWNLOAD='false'
+$env:ENABLE_DEBUG_PAYLOADS='true'
 $env:RUN_OPENSEARCH_INTEGRATION='1'
-.\.venv\Scripts\python.exe -m pytest -q -rA --junitxml=artifacts/final_pytest.xml
+.\.venv\Scripts\python.exe -m pytest -q -rA --junitxml=artifacts/release_pytest.xml
 node --experimental-strip-types --test integration/ui-proxy/advancedSearch.test.mjs
 .\.venv\Scripts\python.exe scripts/run_benchmark.py
 ```

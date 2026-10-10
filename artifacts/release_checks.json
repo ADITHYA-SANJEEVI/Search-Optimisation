@@ -1,0 +1,95 @@
+{
+  "timestamp_ist": "2026-10-11T05:02:13.643767+05:30",
+  "acceptance_base_commit": "d69207e79a8349ac62f81598e0278bf447fe4d74",
+  "backup_branch": "backup/advanced-search-pre-release",
+  "release_branch": "release/advanced-search-final",
+  "annotated_tag": "advanced-search-integration-final",
+  "origin": "https://github.com/ADITHYA-SANJEEVI/Search-Optimisation.git",
+  "python": {
+    "tests": 90,
+    "failures": 0,
+    "errors": 0,
+    "skipped": 0,
+    "passed": 90,
+    "xfailed": 0,
+    "duration_seconds": 522.672
+  },
+  "node": {
+    "tests": 7,
+    "passed": 7,
+    "failed": 0,
+    "skipped": 0,
+    "cancelled": 0,
+    "todo": 0
+  },
+  "quality": {
+    "positive_total": 252,
+    "negative_total": 20,
+    "top1_hits": 250,
+    "top3_hits": 252,
+    "negative_passes": 20
+  },
+  "quality_matches_preserved_metrics": true,
+  "environment": {
+    "python": "3.12.10",
+    "node": "v22.19.0",
+    "packages": {
+      "fastapi": "0.135.3",
+      "pydantic": "2.12.5",
+      "pytest": "9.0.3",
+      "opensearch-py": "3.1.0",
+      "sentence-transformers": "5.4.0",
+      "torch": "2.11.0",
+      "transformers": "5.5.3",
+      "rapidfuzz": "3.14.5"
+    },
+    "semantic_provider": "sentence_transformer",
+    "model": "sentence-transformers/all-MiniLM-L6-v2",
+    "model_downloads_enabled": false
+  },
+  "test_environment": {
+    "RUN_OPENSEARCH_INTEGRATION": "1",
+    "SEARCH_BACKEND": "inmemory",
+    "BOOTSTRAP_SAMPLE_DATA": "true",
+    "AUTH_ENABLED": "false",
+    "RATE_LIMIT_ENABLED": "false",
+    "SEMANTIC_MODEL_ALLOW_DOWNLOAD": "false",
+    "ENABLE_DEBUG_PAYLOADS": "true"
+  },
+  "commands": {
+    "python": ".\\.venv\\Scripts\\python.exe -m pytest -q -rA --junitxml=artifacts/release_pytest.xml",
+    "node": "node --experimental-strip-types --test integration/ui-proxy/advancedSearch.test.mjs",
+    "quality": ".\\.venv\\Scripts\\python.exe scripts/run_benchmark.py"
+  },
+  "local_opensearch": {
+    "version": "2.19.1",
+    "cluster_status": "yellow",
+    "sphere_index_status": "green",
+    "sphere_index_document_count": 620
+  },
+  "checks": {
+    "docker_compose_config": "passed",
+    "upstream_patch_apply_check": "passed against retained pinned snapshot",
+    "historical_live_evidence_preserved": true,
+    "new_live_sync_performed": false,
+    "production_mutations_performed": false,
+    "expected_answers_modified": false,
+    "executable_changes_since_backup": "three EOF blank-line removals only"
+  },
+  "cleanup": {
+    "ignored_runtime_kept_locally": true,
+    "temporary_patch_check_removal": "blocked by automatic policy; retained locally and excluded from Git and Docker build"
+  },
+  "secret_audit": {
+    "candidate_files": 135,
+    "actual_secrets_detected": 0,
+    "reviewed_assignment_matches": 5,
+    "assignment_match_classification": [
+      "example placeholder",
+      "development-only launcher key",
+      "three ordinary code expressions"
+    ],
+    "forbidden_tracked_paths": [],
+    "files_over_5_mib": []
+  }
+}
