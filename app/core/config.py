@@ -25,7 +25,7 @@ def _int(name: str, default: int) -> int:
 
 @dataclass(slots=True)
 class Settings:
-    app_name: str = os.getenv("APP_NAME", "Aastrika Sphere Search Service")
+    app_name: str = os.getenv("APP_NAME", "search_opt")
     environment: str = os.getenv("ENVIRONMENT", "development")
     host: str = os.getenv("HOST", "0.0.0.0")
     port: int = _int("PORT", 8000)
@@ -45,10 +45,11 @@ class Settings:
     sample_data_path: str = os.getenv("SAMPLE_DATA_PATH", "sample_data/courses.json")
     search_backend: str = os.getenv("SEARCH_BACKEND", "inmemory")
     opensearch_url: str = os.getenv("OPENSEARCH_URL", "http://localhost:9200")
-    opensearch_index: str = os.getenv("OPENSEARCH_INDEX", "aastrika-courses-v1")
+    opensearch_index: str = os.getenv("OPENSEARCH_INDEX", "search-opt-items-v1")
     opensearch_verify_certs: bool = _bool("OPENSEARCH_VERIFY_CERTS", False)
     opensearch_timeout_seconds: int = _int("OPENSEARCH_TIMEOUT_SECONDS", 10)
     enable_semantic_search: bool = _bool("ENABLE_SEMANTIC_SEARCH", True)
+    semantic_model_allow_download: bool = _bool("SEMANTIC_MODEL_ALLOW_DOWNLOAD", False)
     enable_indic_transliteration: bool = _bool("ENABLE_INDIC_TRANSLITERATION", True)
     enable_debug_payloads: bool = _bool("ENABLE_DEBUG_PAYLOADS", True)
     voice_mock_enabled: bool = _bool("VOICE_MOCK_ENABLED", True)
@@ -76,6 +77,10 @@ class Settings:
             "semantic": _float("WEIGHT_SEMANTIC", 0.18),
             "phrase": _float("WEIGHT_PHRASE", 0.08),
             "phonetic": _float("WEIGHT_PHONETIC", 0.04),
+            "attribute": _float("WEIGHT_ATTRIBUTE", 0.12),
+            "contextual": _float("WEIGHT_CONTEXTUAL", 0.08),
+            "quality": _float("WEIGHT_QUALITY", 0.04),
+            "conflict_penalty": _float("WEIGHT_CONFLICT_PENALTY", 0.18),
             "popularity": _float("WEIGHT_POPULARITY", 0.03),
             "recency": _float("WEIGHT_RECENCY", 0.01),
             "language_boost": _float("WEIGHT_LANGUAGE_BOOST", 0.06),

@@ -1,0 +1,48 @@
+{
+  "python": {
+    "passed": 90,
+    "failed": 0,
+    "errors": 0,
+    "skipped": 0,
+    "xfailed": 0
+  },
+  "health_rerun": {
+    "passed": 2,
+    "failed": 0,
+    "errors": 0,
+    "skipped": 0,
+    "xfailed": 0
+  },
+  "node": {
+    "passed": 7,
+    "failed": 0,
+    "skipped": 0,
+    "xfailed": 0
+  },
+  "timestamp": "2026-10-07T14:15:32.299947+00:00",
+  "head": "b2ba79fb4b8a9b1185442753100ae8e75948e6a3",
+  "branch": "feature/sphere-contract-adapter-local-20260930-1652",
+  "local_opensearch": {
+    "version": "2.19.1",
+    "cluster_status": "yellow",
+    "sphere_index_status": "green",
+    "sphere_index_document_count": 620,
+    "shards": 1,
+    "replicas": 0
+  },
+  "api": {
+    "base_url": "http://127.0.0.1:8017",
+    "ready_http_status": 200,
+    "liveness": "live",
+    "restarted_after_final_changes": true
+  },
+  "checks": {
+    "compileall": "exit 0",
+    "docker_compose_config": "exit 0",
+    "git_diff_check": "exit 0",
+    "git_diff_cached_check": "exit 0, empty index",
+    "upstream_pinned_snapshot_match": true,
+    "upstream_patch_apply_check": "exit 0",
+    "env_ignored_and_untracked": true
+  }
+}

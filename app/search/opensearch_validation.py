@@ -3,6 +3,7 @@
 from __future__ import annotations
 
 import os
+import uuid
 from contextlib import contextmanager
 from typing import Any
 
@@ -17,13 +18,22 @@ from app.services.bootstrap import build_container
 @contextmanager
 def opensearch_container_env():
     previous_backend = settings.search_backend
+    previous_index = settings.opensearch_index
+    previous_container = app.state.container
+    settings.opensearch_index = "search-opt-smoke-" + uuid.uuid4().hex
     settings.search_backend = "opensearch"
+    container = None
     try:
         container = build_container()
         app.state.container = container
         yield container
     finally:
+        if container is not None:
+            container.backend.client.indices.delete(index=settings.opensearch_index)
+            container.backend.client.close()
         settings.search_backend = previous_backend
+        settings.opensearch_index = previous_index
+        app.state.container = previous_container
 
 
 def run_opensearch_smoke_validation() -> dict[str, Any]:

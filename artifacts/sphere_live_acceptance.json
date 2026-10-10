@@ -1,0 +1,48 @@
+{
+  "timestamp": "2026-10-07T14:13:15.536038+00:00",
+  "api_base": "http://127.0.0.1:8017",
+  "backend_index": "sphere-courses-v1",
+  "index_count": 620,
+  "readiness_status": 200,
+  "query": "pregnancy",
+  "query_total": 36,
+  "query_page": {
+    "ids": [
+      "do_1140040324179148801162",
+      "do_1143718632876851201351"
+    ],
+    "total": 36,
+    "corrected_query": "fever in pregnancy"
+  },
+  "browse_total": 620,
+  "browse_ids_first5": [
+    "do_11423747308190105611",
+    "do_11458214925713408013",
+    "do_1146664448176865281872",
+    "do_1146664514121973761820",
+    "do_1146615752792883201793"
+  ],
+  "typo": {
+    "ids": [
+      "do_1143024882114969601461",
+      "do_1143265111633100801981",
+      "do_1137533766819430401136",
+      "do_11373925107524403212430",
+      "do_11373923012952064012392"
+    ],
+    "total": 99,
+    "corrected_query": "postpartum hemorrhage management"
+  },
+  "fetched_original_ids_reordered": [
+    "do_1140040324179148801162",
+    "do_1143718632876851201351"
+  ],
+  "passed_scenarios": [
+    "A: query/pagination/public-record-fetch/reorder",
+    "B: typo correction",
+    "C: browse matches OpenSearch date sort",
+    "readiness",
+    "determinism",
+    "offset >= total"
+  ]
+}

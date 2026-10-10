@@ -1,0 +1,21 @@
+{
+  "timestamp": "2026-10-07T14:13:17.609Z",
+  "query": "pregnancy",
+  "limit": 3,
+  "offset": 2,
+  "total": 36,
+  "ordered_ids": [
+    "do_1140040324179148801162",
+    "do_11373496476529459212011"
+  ],
+  "omitted_ids": [
+    "do_1143718632876851201351"
+  ],
+  "omission_policy": "Retain fetched records eligible under existing !competency rule; omit absent IDs",
+  "calls": [
+    "http://127.0.0.1:8017/v1/search",
+    "https://sphere.aastrika.org/apis/public/v8/publicContent/v1/search"
+  ],
+  "record_order_deliberately_reversed": true,
+  "passed": true
+}

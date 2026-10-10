@@ -45,6 +45,14 @@ class InMemorySearchBackend(SearchBackend):
         self._idf: dict[str, float] = {}
         self._avg_all_len = 1.0
         self._avg_title_len = 1.0
+        self._vocabulary_cache: list[str] | None = None
+        self._repair_vocabulary_cache: list[str] | None = None
+        self._title_choices_cache: list[str] | None = None
+
+    def _invalidate_caches(self) -> None:
+        self._vocabulary_cache = None
+        self._repair_vocabulary_cache = None
+        self._title_choices_cache = None
 
     def _prepare_document(self, payload: CourseDocumentPayload) -> IndexedCourse:
         auto_transliterations = []
@@ -60,7 +68,7 @@ class InMemorySearchBackend(SearchBackend):
                 payload.competency_name or "",
                 " ".join(payload.levels),
                 payload.updated_on or "",
-                " ".join(str(value) for value in payload.metadata.values()),
+                " ".join(payload.searchable_metadata),
             ]
         )
         all_text = " ".join(
@@ -124,6 +132,8 @@ class InMemorySearchBackend(SearchBackend):
             language=normalize_for_match(payload.language),
             available_languages=[normalize_for_match(language) for language in payload.available_languages],
             category=payload.category,
+            content_type=payload.content_type,
+            publication_status=payload.publication_status,
             topic=payload.topic,
             competency_name=payload.competency_name,
             levels=payload.levels,
@@ -162,12 +172,15 @@ class InMemorySearchBackend(SearchBackend):
 
     def bulk_upsert(self, documents: list[CourseDocumentPayload]) -> int:
         for document in documents:
-            self.upsert_one(document)
+            self._documents[document.course_id] = self._prepare_document(document)
+        self._recompute_stats()
+        self._invalidate_caches()
         return len(documents)
 
     def upsert_one(self, document: CourseDocumentPayload) -> None:
         self._documents[document.course_id] = self._prepare_document(document)
         self._recompute_stats()
+        self._invalidate_caches()
 
     def delete_many(self, course_ids: list[str]) -> int:
         deleted = 0
@@ -176,6 +189,7 @@ class InMemorySearchBackend(SearchBackend):
                 del self._documents[course_id]
                 deleted += 1
         self._recompute_stats()
+        self._invalidate_caches()
         return deleted
 
     def all_documents(self) -> list[IndexedCourse]:
@@ -185,15 +199,20 @@ class InMemorySearchBackend(SearchBackend):
         return len(self._documents)
 
     def vocabulary(self) -> list[str]:
+        if self._vocabulary_cache is not None:
+            return self._vocabulary_cache
         terms = set()
         for document in self._documents.values():
             terms.update(document.all_terms)
             terms.update(document.title_terms)
             terms.update(tokenize(" ".join(document.aliases), keep_stopwords=False))
             terms.update(tokenize(" ".join(document.transliterations), keep_stopwords=False))
-        return sorted(terms)
+        self._vocabulary_cache = sorted(terms)
+        return self._vocabulary_cache
 
     def repair_vocabulary(self) -> list[str]:
+        if self._repair_vocabulary_cache is not None:
+            return self._repair_vocabulary_cache
         terms = set()
         for document in self._documents.values():
             terms.update(document.title_terms)
@@ -202,14 +221,18 @@ class InMemorySearchBackend(SearchBackend):
             terms.update(tokenize(" ".join(document.transliterations), keep_stopwords=False))
             if document.competency_name:
                 terms.update(tokenize(document.competency_name, keep_stopwords=False))
-        return sorted(terms)
+        self._repair_vocabulary_cache = sorted(terms)
+        return self._repair_vocabulary_cache
 
     def title_choices(self) -> list[str]:
+        if self._title_choices_cache is not None:
+            return self._title_choices_cache
         values = []
         for document in self._documents.values():
             values.append(document.title_normalized)
             values.extend(document.aliases_normalized)
-        return sorted(set(values))
+        self._title_choices_cache = sorted(set(values))
+        return self._title_choices_cache
 
     def grouped_variants(self, group_id: str, exclude_course_id: str) -> list[IndexedCourse]:
         return [
@@ -294,6 +317,10 @@ class InMemorySearchBackend(SearchBackend):
             semantic_score=semantic_score,
             phonetic_score=phonetic_score,
             language_boost=language_boost,
+            attribute_score=0.0,
+            contextual_score=0.0,
+            quality_score=0.0,
+            conflict_penalty=0.0,
             popularity_score=document.popularity_score,
             recency_score=document.recency_score,
             matched_terms=matched_terms,

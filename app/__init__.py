@@ -1,1 +1,1 @@
-"""Aastrika Sphere intelligent search service."""
+"""search_opt search optimization service."""

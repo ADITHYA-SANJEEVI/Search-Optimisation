@@ -26,8 +26,7 @@ class OpenSearchBackedSearchBackend(InMemorySearchBackend):
         super().__init__(encoder=encoder)
         self.client = None
         if OpenSearch is None:
-            logger.warning("opensearch-py unavailable, OpenSearch backend cannot be enabled")
-            return
+            raise RuntimeError("opensearch-py is required for the configured backend")
         self.client = OpenSearch(
             hosts=[settings.opensearch_url],
             verify_certs=settings.opensearch_verify_certs,
@@ -42,11 +41,21 @@ class OpenSearchBackedSearchBackend(InMemorySearchBackend):
         if self.client is None:
             return
         if self.client.indices.exists(index=settings.opensearch_index):
+            mappings = self.client.indices.get_mapping(index=settings.opensearch_index)
+            mapping = mappings[settings.opensearch_index]["mappings"]
+            properties = mapping.get("properties", {})
+            if (mapping.get("dynamic") != "strict" or
+                properties.get("course_id", {}).get("type") != "keyword" or
+                properties.get("updated_on", {}).get("type") != "date" or
+                properties.get("metadata", {}).get("enabled") is not False):
+                raise RuntimeError("Incompatible OpenSearch mapping; configure a new index and full-sync it")
             return
         self.client.indices.create(
             index=settings.opensearch_index,
             body={
                 "settings": {
+                    "number_of_shards": 1,
+                    "number_of_replicas": 0,
                     "analysis": {
                         "normalizer": {
                             "lowercase_normalizer": {
@@ -58,6 +67,8 @@ class OpenSearchBackedSearchBackend(InMemorySearchBackend):
                     }
                 },
                 "mappings": {
+                    "dynamic": "strict",
+                    "date_detection": False,
                     "properties": {
                         "course_id": {"type": "keyword"},
                         "group_id": {"type": "keyword"},
@@ -71,17 +82,20 @@ class OpenSearchBackedSearchBackend(InMemorySearchBackend):
                         "language": {"type": "keyword", "normalizer": "lowercase_normalizer"},
                         "available_languages": {"type": "keyword", "normalizer": "lowercase_normalizer"},
                         "category": {"type": "keyword"},
+                        "content_type": {"type": "keyword"},
+                        "publication_status": {"type": "keyword"},
                         "topic": {"type": "keyword"},
                         "competency_name": {"type": "text"},
                         "levels": {"type": "keyword"},
                         "updated_on": {"type": "date", "format": "strict_date_optional_time||MMM d, yyyy"},
                         "difficulty": {"type": "keyword"},
-                        "duration_minutes": {"type": "integer"},
+                        "duration_minutes": {"type": "integer", "coerce": False},
                         "certification": {"type": "boolean"},
-                        "popularity_score": {"type": "float"},
-                        "recency_score": {"type": "float"},
+                        "popularity_score": {"type": "float", "coerce": False},
+                        "recency_score": {"type": "float", "coerce": False},
                         "active": {"type": "boolean"},
-                        "metadata": {"type": "object", "enabled": True},
+                        "searchable_metadata": {"type": "text"},
+                        "metadata": {"type": "object", "enabled": False},
                     }
                 },
             },
@@ -90,25 +104,31 @@ class OpenSearchBackedSearchBackend(InMemorySearchBackend):
     def _serialize(self, document: CourseDocumentPayload) -> dict[str, Any]:
         body = document.model_dump()
         body["group_id"] = document.group_id or document.course_id
+        if document.updated_on:
+            from app.utils.dates import parse_date
+            body["updated_on"] = parse_date(document.updated_on).isoformat()
         return body
 
     def _reload_cache(self) -> None:
         if self.client is None:
             return
-        response = self.client.search(
-            index=settings.opensearch_index,
-            body={"query": {"match_all": {}}, "size": 10000},
-        )
-        hits = response.get("hits", {}).get("hits", [])
-        self._documents.clear()
+        hits = helpers.scan(self.client, index=settings.opensearch_index,
+                            query={"query": {"match_all": {}}}, size=500)
+        documents = {}
         for hit in hits:
-            self._documents[hit["_id"]] = self._prepare_document(CourseDocumentPayload(**hit["_source"]))
+            document = CourseDocumentPayload(**hit["_source"])
+            if hit["_id"] != document.course_id:
+                raise RuntimeError("Index identity does not match canonical course ID")
+            documents[hit["_id"]] = self._prepare_document(document)
+        self._documents = documents
         self._recompute_stats()
+        self._invalidate_caches()
 
     def bulk_upsert(self, documents: list[CourseDocumentPayload]) -> int:
-        indexed = super().bulk_upsert(documents)
         if self.client is None or helpers is None:
-            return indexed
+            raise RuntimeError("OpenSearch client unavailable")
+        if not documents:
+            return 0
         actions = [
             {
                 "_op_type": "index",
@@ -118,39 +138,39 @@ class OpenSearchBackedSearchBackend(InMemorySearchBackend):
             }
             for document in documents
         ]
-        helpers.bulk(self.client, actions)
-        self.client.indices.refresh(index=settings.opensearch_index)
-        return indexed
+        try:
+            helpers.bulk(self.client, actions)
+            self.client.indices.refresh(index=settings.opensearch_index)
+        except Exception:
+            # Bulk failures may have persisted a subset; never keep a false local snapshot.
+            self._reload_cache()
+            raise
+        return super().bulk_upsert(documents)
 
     def upsert_one(self, document: CourseDocumentPayload) -> None:
-        super().upsert_one(document)
-        if self.client is None:
-            return
-        self.client.index(
-            index=settings.opensearch_index,
-            id=document.course_id,
-            body=self._serialize(document),
-            refresh=True,
-        )
+        self.bulk_upsert([document])
 
     def delete_many(self, course_ids: list[str]) -> int:
-        deleted = super().delete_many(course_ids)
         if self.client is None or not course_ids:
-            return deleted
+            return 0
         actions = [
             {"_op_type": "delete", "_index": settings.opensearch_index, "_id": course_id}
             for course_id in course_ids
         ]
         if helpers is not None:
-            helpers.bulk(self.client, actions, raise_on_error=False)
+            helpers.bulk(self.client, actions, ignore_status=(404,))
             self.client.indices.refresh(index=settings.opensearch_index)
-        return deleted
+        return super().delete_many(course_ids)
 
     def health_details(self) -> dict[str, Any]:
         if self.client is None:
             return {"status": "degraded", "reason": "client_unavailable"}
         try:
             response = self.client.cluster.health()
-            return {"status": response.get("status", "unknown"), "cluster_name": response.get("cluster_name")}
+            exists = self.client.indices.exists(index=settings.opensearch_index)
+            count = self.client.count(index=settings.opensearch_index)["count"] if exists else 0
+            usable = exists and response.get("status") in {"green", "yellow"} and count == self.document_count()
+            return {"status": "up" if usable else "down", "cluster_status": response.get("status"),
+                    "index_exists": exists, "index_document_count": count}
         except Exception as exc:  # pragma: no cover
-            return {"status": "down", "reason": str(exc)}
+            return {"status": "down", "reason": type(exc).__name__}

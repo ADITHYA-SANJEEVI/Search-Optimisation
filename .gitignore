@@ -15,6 +15,7 @@ __pycache__/
 data/*.db
 artifacts/test_tmp/
 artifacts/demo-server*.log
+artifacts/runtime/
 
 # Temporary local test directories
 .pytest_tmp/

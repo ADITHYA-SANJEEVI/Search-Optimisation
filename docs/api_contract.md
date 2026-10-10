@@ -1,4 +1,6 @@
-# API Contract
+# Demo API Contract
+
+Sphere production integration uses the IDs-only `POST /v1/search` contract in [SPHERE_API_CONTRACT.md](SPHERE_API_CONTRACT.md). The full-record routes below serve the existing demo/evaluation surface.
 
 ## Versioning
 

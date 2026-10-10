@@ -1,6 +1,6 @@
 # Search Test Cases And Acceptance Metrics
 
-This document defines the demo evaluation bar for the Aastrika Sphere intelligent search service against the current course catalog.
+This document defines the demo evaluation bar for search_opt against the current sample catalog.
 
 ## Scope
 
@@ -92,3 +92,7 @@ The benchmark script must emit:
 - correction success
 - zero-result precision
 - failures with offending query text and returned group ids
+
+## Integration closure results (7 October 2026)
+
+The historical expectations above were preserved. Measured results: 250/252 positive Top1, 252/252 Recall@3, 20/20 negatives. The 5/6 level-query Top1 result (83.3%) remains below the stated 85% aspiration. The complete set of 30 metrics is not individually measured by the existing benchmark. Six named quality cases also passed through the IDs-only boundary; see final evidence.

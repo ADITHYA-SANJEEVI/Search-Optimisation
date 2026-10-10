@@ -1,5 +1,5 @@
 services:
-  aastrika-search:
+  search-opt:
     build:
       context: .
       dockerfile: docker/Dockerfile
@@ -7,15 +7,31 @@ services:
       - "8000:8000"
     env_file:
       - .env.example
+    environment:
+      SEARCH_BACKEND: opensearch
+      OPENSEARCH_URL: http://opensearch:9200
+      OPENSEARCH_INDEX: ${OPENSEARCH_INDEX:-sphere-courses-v1}
+      BOOTSTRAP_SAMPLE_DATA: "false"
+      ENABLE_DEBUG_PAYLOADS: "false"
     depends_on:
-      - opensearch
+      opensearch:
+        condition: service_healthy
   opensearch:
     image: opensearchproject/opensearch:2.19.1
     environment:
       discovery.type: single-node
       plugins.security.disabled: "true"
-      OPENSEARCH_INITIAL_ADMIN_PASSWORD: "AastrikaDemoPass123!"
+      DISABLE_INSTALL_DEMO_CONFIG: "true"
       OPENSEARCH_JAVA_OPTS: "-Xms512m -Xmx512m"
     ports:
-      - "9200:9200"
-      - "9600:9600"
+      - "127.0.0.1:9200:9200"
+      - "127.0.0.1:9600:9600"
+    volumes:
+      - opensearch-data:/usr/share/opensearch/data
+    healthcheck:
+      test: ["CMD-SHELL", "curl -fsS http://localhost:9200/_cluster/health >/dev/null"]
+      interval: 5s
+      timeout: 3s
+      retries: 30
+volumes:
+  opensearch-data:

@@ -1,38 +1,11 @@
 # Architecture
 
-## Overview
+Python FastAPI owns `/v1/search`, validation, and service orchestration. The existing QueryProcessor and PRISM ranker retain richer search semantics. OpenSearch owns persistent course documents with canonical keyword IDs and explicit sortable dates. Startup scans the entire index into the existing scoring snapshot; query requests score that complete population before paging. No new search engine or Java layer is introduced.
 
-The service is a Python 3.11+ FastAPI microservice that exposes a versioned REST API for intelligent course search. It is designed as a standalone search backend that a Java service can call over HTTP without sharing a database or runtime.
+The catalogue sync calls the read-only Sphere public API with Live Course filters, limit, and offset, validates records through the existing adapter, then upserts by original identifier. Incremental mode still scans the complete public population and compares content fingerprints stored in index metadata. It is not an upstream delta feed. Completed rejection-free traversals remove absent source-owned records. Rejected records suppress pruning, preserving prior indexed records until repaired.
 
-## Core layers
+The existing Node UI proxy feature flag calls Advanced Search only for applicable queries, receives IDs, fetches full public records, and reorders them by those IDs. A failure returns control to the original legacy handler without recursion. Browse stays on the existing proxy path; `/v1/search` also supports date-ordered browse for direct consumers.
 
-- `app/api/`: transport layer and versioned REST routes
-- `app/services/`: orchestration for search and indexing flows
-- `app/search/`: query preprocessing, repair, encoding, and retrieval backend
-- `app/ranking/`: hybrid reranking and confidence scoring
-- `app/suggest/`: low-latency dropdown suggestions
-- `app/voice/`: STT adapter seam for voice search
-- `app/analytics/`: logging and metric hooks
-- `app/schemas/`: stable request and response contracts
+External CLI sync and a running API have separate snapshots. Stop/restart the API after syncing externally; production scheduling and coordinated refresh ownership remain deployment tasks. Readiness checks index existence, cluster availability, cached/indexed count reconciliation, and a populated catalogue. Empty indexes return warming/503. Liveness reports process availability without backend I/O. An explicitly configured OpenSearch startup failure is fatal rather than silently switching to memory.
 
-## Search pipeline
-
-1. Query normalization
-2. Repair candidate generation
-3. Intent extraction
-4. Hybrid retrieval
-5. Reranking and confidence scoring
-6. Suggestion generation
-7. Analytics logging
-
-## Storage model
-
-The implementation uses an in-memory search backend for local execution and tests. That backend is exposed through a `SearchBackend` abstraction so an Elasticsearch/OpenSearch adapter can later replace it without changing REST contracts or orchestration code.
-
-## Integration posture
-
-- JSON-only request/response payloads
-- Stable `/api/v1` namespace
-- Structured health/readiness/liveness routes
-- Idempotent indexing behavior through upsert-style operations
-- Explicit error envelopes for Java-side fallback handling
+The `/api/v1` routes and browser demo remain a separate existing evaluation surface. Search analytics are noncritical; cached semantic models and the existing local fallback are supported. No models are added by this integration.

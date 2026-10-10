@@ -26,6 +26,8 @@ class IndexedCourse:
     language: str
     available_languages: list[str]
     category: str
+    content_type: str | None
+    publication_status: str | None
     topic: str
     competency_name: str | None
     levels: list[str]
@@ -56,8 +58,12 @@ class SearchCandidate:
     semantic_score: float
     phonetic_score: float
     language_boost: float
+    attribute_score: float
+    contextual_score: float
+    quality_score: float
+    conflict_penalty: float
     popularity_score: float
     recency_score: float
     matched_terms: list[str]
     explanations: list[str]
-    score_breakdown: dict[str, float]
+    score_breakdown: dict[str, Any]

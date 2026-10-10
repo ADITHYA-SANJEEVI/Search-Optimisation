@@ -4,14 +4,18 @@ from __future__ import annotations
 
 from typing import Any, Literal
 
-from pydantic import BaseModel, Field
+from pydantic import BaseModel, Field, ConfigDict, AliasChoices
 
 from app.schemas.common import HighlightFields, Pagination, SuggestionGroup
 
 
 class SearchFilters(BaseModel):
+    model_config = ConfigDict(extra="forbid")
     language: str | None = None
     category: str | None = None
+    categories: list[str] = Field(default_factory=list)
+    content_types: list[str] = Field(default_factory=list)
+    publication_statuses: list[str] = Field(default_factory=list)
     topic: str | None = None
     instructor: str | None = None
     difficulty: str | None = None
@@ -19,11 +23,34 @@ class SearchFilters(BaseModel):
     certification: bool | None = None
 
 
+class AdvancedSearchFilters(SearchFilters):
+    model_config = ConfigDict(extra="forbid", strict=True)
+    categories: list[str] = Field(default_factory=list, validation_alias=AliasChoices("primaryCategory", "categories"))
+    content_types: list[str] = Field(default_factory=list, validation_alias=AliasChoices("contentType", "content_types"))
+    publication_statuses: list[str] = Field(default_factory=list, validation_alias=AliasChoices("status", "publication_statuses"))
+
+
+class AdvancedSearchRequest(BaseModel):
+    model_config = ConfigDict(extra="forbid", strict=True)
+    query: str = Field(default="", max_length=240)
+    filters: AdvancedSearchFilters = Field(default_factory=AdvancedSearchFilters)
+    limit: int = Field(default=10, ge=1, le=100)
+    offset: int = Field(default=0, ge=0, le=1000000)
+
+
+class AdvancedSearchResponse(BaseModel):
+    ids: list[str]
+    total: int
+    corrected_query: str | None = None
+
+
 class SearchRequest(BaseModel):
     query: str
     filters: SearchFilters = Field(default_factory=SearchFilters)
     page: int = 1
     page_size: int = 10
+    limit: int | None = Field(default=None, ge=1, le=100, strict=True)
+    offset: int | None = Field(default=None, ge=0, le=1000000, strict=True)
     cursor: str | None = None
     sort: Literal["relevance", "popularity", "newest", "alphabetical", "recommended"] = "relevance"
     preferred_language: str | None = None

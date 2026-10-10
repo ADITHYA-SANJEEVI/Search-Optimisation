@@ -4,14 +4,18 @@ from __future__ import annotations
 
 import math
 from time import perf_counter
+from types import SimpleNamespace
 
 from app.analytics.tracker import AnalyticsTracker
 from app.core.config import settings
 from app.core.errors import ServiceError
 from app.models.course import SearchCandidate
-from app.ranking.reranker import HybridReranker
+from app.models.query import QueryState
+from app.ranking.reranker import AastrikaPrismRanker
 from app.schemas.common import HighlightFields, Pagination
 from app.schemas.search import (
+    AdvancedSearchRequest,
+    AdvancedSearchResponse,
     CourseVariant,
     NoResultsGuidance,
     SearchIntentPayload,
@@ -27,11 +31,42 @@ from app.utils.text import compact_text, filter_retrieval_terms, normalize_for_m
 
 
 class SearchService:
+    def search_ids(self, request: AdvancedSearchRequest) -> AdvancedSearchResponse:
+        if hasattr(self.backend, "health_details"):
+            if self.backend.health_details().get("status") != "up":
+                raise ServiceError("search_backend_unavailable", "Search index is unavailable", status_code=503)
+        filters = request.filters.model_dump()
+        # This product indexes Live Courses. Keep eligibility independent of caller filters.
+        documents = [doc for doc in self.backend.all_documents()
+                     if doc.active and normalize_for_match(doc.category) == "course"
+                     and normalize_for_match(doc.publication_status or "") == "live"]
+        eligible = {doc.course_id for doc in documents}
+        query = request.query.strip()
+        correction = None
+        if query:
+            state = self.query_processor.build(query=query, requested_filters=filters,
+                                               preferred_language=None, debug=False)
+            candidates = [c for c in self._retrieve_candidates(state) if c.course.course_id in eligible]
+            # Rank the entire matching population before slicing. Exact IDs break score ties.
+            candidates.sort(key=lambda c: (-c.score_breakdown.get("total", 0.0), c.course.course_id))
+            ids = [c.course.course_id for c in candidates]
+            correction = state.corrected_query
+        else:
+            from app.utils.dates import timestamp
+            documents.sort(key=lambda doc: (-timestamp(doc.updated_on), doc.course_id))
+            ids = []
+            for doc in documents:
+                # Filter logic only accesses .course; no ranking is needed for browse.
+                if self._passes_filters(SimpleNamespace(course=doc), filters):
+                    ids.append(doc.course_id)
+        return AdvancedSearchResponse(ids=ids[request.offset:request.offset + request.limit],
+                                      total=len(ids), corrected_query=correction)
+
     def __init__(
         self,
         backend: InMemorySearchBackend,
         query_processor: QueryProcessor,
-        reranker: HybridReranker,
+        reranker: AastrikaPrismRanker,
         suggester: SuggestService,
         encoder: SemanticEncoder,
         analytics: AnalyticsTracker,
@@ -48,6 +83,15 @@ class SearchService:
         if filters.get("language") and course.language != normalize_for_match(str(filters["language"])):
             return False
         if filters.get("category") and normalize_for_match(course.category) != normalize_for_match(str(filters["category"])):
+            return False
+        categories = {normalize_for_match(str(value)) for value in filters.get("categories", [])}
+        if categories and normalize_for_match(course.category) not in categories:
+            return False
+        content_types = {normalize_for_match(str(value)) for value in filters.get("content_types", [])}
+        if content_types and normalize_for_match(course.content_type or "") not in content_types:
+            return False
+        statuses = {normalize_for_match(str(value)) for value in filters.get("publication_statuses", [])}
+        if statuses and normalize_for_match(course.publication_status or "") not in statuses:
             return False
         if filters.get("topic") and normalize_for_match(course.topic) != normalize_for_match(str(filters["topic"])):
             return False
@@ -69,10 +113,10 @@ class SearchService:
                 reverse=True,
             )
         if sort == "newest":
+            from app.utils.dates import timestamp
             return sorted(
                 candidates,
-                key=lambda item: (item.course.recency_score, item.score_breakdown.get("total", 0.0)),
-                reverse=True,
+                key=lambda item: (-timestamp(item.course.updated_on), item.course.course_id),
             )
         if sort == "alphabetical":
             return sorted(candidates, key=lambda item: item.course.title.lower())
@@ -98,6 +142,59 @@ class SearchService:
                     facets["difficulty"].get(candidate.course.difficulty, 0) + 1
                 )
         return facets
+
+    def _apply_prism_signals(self, candidate: SearchCandidate, state: QueryState) -> None:
+        course = candidate.course
+        query_terms = set(state.normalized_tokens) | set(state.expanded_terms)
+        attribute_checks = [
+            bool(query_terms & set(tokenize(course.topic, keep_stopwords=False))),
+            bool(query_terms & set(tokenize(course.category, keep_stopwords=False))),
+            bool(course.competency_name and query_terms & set(tokenize(course.competency_name, keep_stopwords=False))),
+            bool(state.intent.difficulty and normalize_for_match(course.difficulty or "") == state.intent.difficulty),
+            bool(state.intent.language_preferences and course.language in state.intent.language_preferences),
+        ]
+        candidate.attribute_score = sum(attribute_checks) / len(attribute_checks)
+
+        contextual_hits = 0
+        if set(state.intent.topics) & {normalize_for_match(course.topic), normalize_for_match(course.category)}:
+            contextual_hits += 1
+        if state.intent.educational_goal and course.duration_minutes and course.duration_minutes <= 90:
+            contextual_hits += 1
+        if state.is_code_mixed and len(course.available_languages) > 1:
+            contextual_hits += 1
+        candidate.contextual_score = contextual_hits / 3
+
+        quality_fields = [
+            course.description,
+            course.tags,
+            course.aliases,
+            course.topic,
+            course.category,
+            course.duration_minutes,
+            course.updated_on,
+        ]
+        candidate.quality_score = sum(1 for value in quality_fields if value) / len(quality_fields)
+
+        penalties = 0.0
+        if state.intent.difficulty and course.difficulty and normalize_for_match(course.difficulty) != state.intent.difficulty:
+            penalties += 0.35
+        if state.intent.language_preferences and course.language not in state.intent.language_preferences:
+            penalties += 0.25
+        requested_topic_terms = set()
+        for topic in state.intent.topics:
+            requested_topic_terms.update(tokenize(topic, keep_stopwords=False))
+        if requested_topic_terms and not (requested_topic_terms & set(course.all_terms)):
+            penalties += 0.25
+        candidate.conflict_penalty = min(penalties, 1.0)
+
+        if candidate.attribute_score >= 0.4:
+            candidate.explanations.append("Structured course attributes match the request")
+        if candidate.contextual_score > 0:
+            candidate.explanations.append("Contextual learning intent matches this course")
+        if candidate.quality_score >= 0.85:
+            candidate.explanations.append("Candidate has complete catalog metadata")
+        if candidate.conflict_penalty > 0:
+            candidate.explanations.append("Some requested attributes conflict with this course")
 
     def _highlight(self, text: str, tokens: list[str]) -> str:
         highlighted = text
@@ -133,6 +230,8 @@ class SearchService:
                 "competency_name": course.competency_name,
                 "levels": course.levels,
                 "updated_on": course.updated_on,
+                "content_type": course.content_type,
+                "publication_status": course.publication_status,
             },
             score=round(candidate.score_breakdown.get("total", 0.0), 4),
             confidence=round(confidence, 4),
@@ -161,7 +260,7 @@ class SearchService:
             filters_to_relax=relax,
         )
 
-    def _retrieve_candidates(self, state) -> list[SearchCandidate]:
+    def _retrieve_candidates(self, state: QueryState) -> list[SearchCandidate]:
         query_terms = filter_retrieval_terms(list(dict.fromkeys([*state.normalized_tokens, *state.expanded_terms])))
         semantic_query = state.corrected_query or state.intent.summary or state.normalized_query
         semantic_vector = self.encoder.encode(semantic_query)
@@ -177,6 +276,7 @@ class SearchService:
                 preferred_languages=state.intent.language_preferences,
                 phonetic_terms=phonetic_terms,
             )
+            self._apply_prism_signals(candidate, state)
             self.reranker.score(candidate)
             if self._passes_filters(candidate, state.applied_filters):
                 total = candidate.score_breakdown.get("total", 0.0)
@@ -218,11 +318,68 @@ class SearchService:
                     preferred_languages=state.intent.language_preferences,
                     phonetic_terms=[soundex(token) for token in fallback_terms],
                 )
+                self._apply_prism_signals(candidate, state)
                 self.reranker.score(candidate)
                 if self._passes_filters(candidate, state.applied_filters):
                     if candidate.score_breakdown.get("total", 0.0) > 0.0:
                         candidates.append(candidate)
         return candidates
+
+    def browse(self, request: SearchRequest) -> SearchResponse:
+        filters = request.filters.model_dump() if hasattr(request.filters, "model_dump") else request.filters.dict()
+        candidates = []
+        for document in self.backend.all_documents():
+            candidate = SearchCandidate(
+                course=document,
+                lexical_score=0.0,
+                title_bm25_score=0.0,
+                fuzzy_score=0.0,
+                phrase_score=0.0,
+                semantic_score=0.0,
+                phonetic_score=0.0,
+                language_boost=0.0,
+                attribute_score=0.0,
+                contextual_score=0.0,
+                quality_score=1.0 if document.description and document.topic and document.category else 0.5,
+                conflict_penalty=0.0,
+                popularity_score=document.popularity_score,
+                recency_score=document.recency_score,
+                matched_terms=[],
+                explanations=["Browse listing"],
+                score_breakdown={},
+            )
+            self.reranker.score(candidate)
+            if self._passes_filters(candidate, {key: value for key, value in filters.items() if value not in (None, "", [])}):
+                candidates.append(candidate)
+
+        sorted_candidates = self._sort_candidates(candidates, request.sort if request.sort != "relevance" else "newest")
+        page_size = request.limit or max(1, min(request.page_size, 500))
+        page = max(1, request.page)
+        total = len(sorted_candidates)
+        start = request.offset if request.offset is not None else (page - 1) * page_size
+        end = start + page_size
+        page_items = sorted_candidates[start:end]
+        response_results = [self._result_item(candidate, [], request.debug) for candidate in page_items]
+        pagination = Pagination(
+            page=page,
+            page_size=page_size,
+            total_results=total,
+            total_pages=max(math.ceil(total / page_size), 1) if total else 0,
+            next_cursor=str(page + 1) if end < total else None,
+        )
+        return SearchResponse(
+            schema_version=settings.schema_version,
+            original_query="",
+            normalized_query="",
+            extracted_search_intent=SearchIntentPayload(intent_type="course_browse", summary="all courses"),
+            filters_applied={key: value for key, value in filters.items() if value not in (None, "", [])},
+            results=response_results,
+            grouped_suggestions=[],
+            alternate_queries=[],
+            no_results_guidance=None if response_results else self._no_results_guidance("all courses", filters, []),
+            facets=self._facet_counts(sorted_candidates),
+            pagination=pagination,
+        )
 
     def search(self, request: SearchRequest, *, route_type: str = "search") -> SearchResponse:
         if not request.query or not request.query.strip():
@@ -253,10 +410,10 @@ class SearchService:
                 continue
             seen_groups.add(identity)
             deduped.append(candidate)
-        page_size = max(1, min(request.page_size, settings.max_page_size))
+        page_size = request.limit or max(1, min(request.page_size, settings.max_page_size))
         page = max(1, int(request.cursor)) if request.cursor and request.cursor.isdigit() else max(1, request.page)
         total = len(deduped)
-        start = (page - 1) * page_size
+        start = request.offset if request.offset is not None else (page - 1) * page_size
         end = start + page_size
         page_items = deduped[start:end]
         response_results = [self._result_item(candidate, state.expanded_terms, request.debug) for candidate in page_items]

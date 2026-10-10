@@ -1,0 +1,35 @@
+{
+  "source_endpoint": "https://sphere.aastrika.org/apis/public/v8/publicContent/v1/search",
+  "page_size": 100,
+  "mode": "full",
+  "timestamp": "2026-10-07T13:54:41.496977+00:00",
+  "pages": 7,
+  "source_records_observed": 620,
+  "source_count": 620,
+  "accepted": 620,
+  "rejected": 0,
+  "duplicates": 0,
+  "upserted": 620,
+  "unchanged": 0,
+  "deleted": 0,
+  "index_document_count": 620,
+  "failures": [],
+  "diagnostics": [
+    {
+      "severity": "warning",
+      "code": "invalid_competency_type",
+      "message": "Ignored competencies_v1 because it was not serialized JSON",
+      "record_index": 49,
+      "identifier": "do_1140902232004608001209",
+      "field": "competencies_v1"
+    },
+    {
+      "severity": "warning",
+      "code": "invalid_competency_type",
+      "message": "Ignored competencies_v1 because it was not serialized JSON",
+      "record_index": 185,
+      "identifier": "do_1137533766819430401136",
+      "field": "competencies_v1"
+    }
+  ]
+}

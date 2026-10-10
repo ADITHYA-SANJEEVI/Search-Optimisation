@@ -1,0 +1,2 @@
+"""External contract adapters."""
+

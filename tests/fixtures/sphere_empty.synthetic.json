@@ -1,0 +1,9 @@
+{
+  "responseCode": "OK",
+  "result": {
+    "content": [],
+    "count": 0,
+    "facets": []
+  },
+  "status": 200
+}

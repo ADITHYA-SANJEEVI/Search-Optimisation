@@ -1,0 +1,20 @@
+# CONFIG READY ONLY. Apply through the environment owner's existing Kong workflow.
+# Replace host and port with the approved internal Advanced Search address.
+_format_version: "3.0"
+services:
+  - name: sphere-advanced-search
+    protocol: http
+    host: advanced-search
+    port: 8000
+    path: /v1/search
+    connect_timeout: 3000
+    read_timeout: 3000
+    write_timeout: 3000
+    retries: 0
+    routes:
+      - name: sphere-advanced-search-v1
+        methods: [POST]
+        paths: [/apis/proxies/v8/advanced-search/v1/search]
+        strip_path: true
+        path_handling: v0
+        preserve_host: false

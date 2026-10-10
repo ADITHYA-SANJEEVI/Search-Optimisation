@@ -48,3 +48,10 @@ def test_zero_result_guidance_is_present_for_unknown_query(container) -> None:
     response = container.search_service.search(SearchRequest(query="quantum astrophysics for toddlers"))
     assert response.results == []
     assert response.no_results_guidance is not None
+
+
+def test_browse_returns_courses_without_query(container) -> None:
+    response = container.search_service.browse(SearchRequest(query="", page_size=200))
+    assert response.results
+    assert response.original_query == ""
+    assert response.pagination.total_results == container.backend.document_count()

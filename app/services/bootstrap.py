@@ -7,7 +7,7 @@ from dataclasses import dataclass
 from app.analytics.storage import SQLiteAnalyticsStore
 from app.analytics.tracker import AnalyticsTracker
 from app.core.config import settings
-from app.ranking.reranker import HybridReranker
+from app.ranking.reranker import AastrikaPrismRanker
 from app.search.backend import InMemorySearchBackend
 from app.search.encoder import SemanticEncoder
 from app.search.opensearch_backend import OpenSearchBackedSearchBackend
@@ -24,7 +24,7 @@ class ServiceContainer:
     backend: InMemorySearchBackend
     analytics: AnalyticsTracker
     query_processor: QueryProcessor
-    reranker: HybridReranker
+    reranker: AastrikaPrismRanker
     suggester: SuggestService
     search_service: SearchService
     index_service: IndexService
@@ -35,10 +35,7 @@ def build_container() -> ServiceContainer:
     encoder = SemanticEncoder()
     backend: InMemorySearchBackend
     if settings.search_backend.lower() == "opensearch":
-        try:
-            backend = OpenSearchBackedSearchBackend(encoder=encoder)
-        except Exception:
-            backend = InMemorySearchBackend(encoder=encoder)
+        backend = OpenSearchBackedSearchBackend(encoder=encoder)
     else:
         backend = InMemorySearchBackend(encoder=encoder)
     analytics_store = None
@@ -49,7 +46,7 @@ def build_container() -> ServiceContainer:
             analytics_store = None
     analytics = AnalyticsTracker(store=analytics_store)
     query_processor = QueryProcessor(backend=backend)
-    reranker = HybridReranker()
+    reranker = AastrikaPrismRanker()
     suggester = SuggestService(backend=backend, query_processor=query_processor)
     search_service = SearchService(
         backend=backend,

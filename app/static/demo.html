@@ -3,17 +3,17 @@
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
-  <title>Aastrika Sphere Search</title>
+  <title>Aastrika Search Demo</title>
   <style>
-    :root{--bg:#f7f1e7;--panel:#fffdfa;--line:#dccab8;--text:#201913;--muted:#6f6255;--accent:#0b6e4f;--accent-soft:#e0f1ea;--shadow:0 18px 40px rgba(54,38,22,.08)}
+    :root{--bg:#f7f1e7;--panel:#fffdfa;--line:#dccab8;--text:#201913;--muted:#6f6255;--accent:#0b6e4f;--accent2:#295f98;--accent-soft:#e0f1ea;--shadow:0 18px 40px rgba(54,38,22,.08)}
     *{box-sizing:border-box}body{margin:0;font-family:"Segoe UI","Trebuchet MS",sans-serif;color:var(--text);background:radial-gradient(circle at top right,rgba(11,110,79,.12),transparent 30%),linear-gradient(180deg,#fbf7f1,#efe3d2)}button,input,select{font:inherit}
-    h1,h2,h3,p{margin:0}.page{width:min(1180px,calc(100% - 28px));margin:22px auto 40px}.panel,.card,.modal-box{background:rgba(255,253,250,.96);border:1px solid var(--line);border-radius:22px;box-shadow:var(--shadow)}.panel{padding:22px}
+    h1,h2,h3,p{margin:0}.page{width:min(1180px,calc(100% - 28px));margin:22px auto 40px}.panel,.card,.modal-box{background:rgba(255,253,250,.96);border:1px solid var(--line);border-radius:8px;box-shadow:var(--shadow)}.panel{padding:22px}
     .row,.chips,.head,.meta,.actions,.layout{display:flex;gap:12px;flex-wrap:wrap;align-items:center}.head{justify-content:space-between}.layout{align-items:flex-start;margin-top:18px}.sidebar{width:280px;display:grid;gap:16px}.main{flex:1 1 700px;display:grid;gap:16px}
     .subtle,.muted{color:var(--muted)}.tiny{font-size:.92rem}.mt{margin-top:12px}.hidden{display:none}
-    input[type=text],select{width:100%;min-height:48px;border:1px solid var(--line);border-radius:16px;padding:0 14px;background:#fff;color:var(--text)}button{min-height:48px;border:1px solid transparent;border-radius:16px;padding:0 16px;background:#f0e6d8;color:var(--text);cursor:pointer}button:hover{transform:translateY(-1px)}button:focus,input:focus,select:focus{outline:2px solid rgba(11,110,79,.18);outline-offset:2px}
+    input[type=text],select{width:100%;min-height:48px;border:1px solid var(--line);border-radius:8px;padding:0 14px;background:#fff;color:var(--text)}button{min-height:48px;border:1px solid transparent;border-radius:8px;padding:0 16px;background:#f0e6d8;color:var(--text);cursor:pointer}button:hover{transform:translateY(-1px)}button:focus,input:focus,select:focus{outline:2px solid rgba(11,110,79,.18);outline-offset:2px}
     .primary{background:linear-gradient(135deg,var(--accent),#14885f);color:#fff}.secondary,.ghost{background:#fff;border-color:var(--line)}.chip,.tag{display:inline-flex;align-items:center;padding:7px 11px;border-radius:999px;border:1px solid var(--line);background:#fff}.chip.good{background:var(--accent-soft);border-color:#b9ddcf;color:#084837}
-    .search-shell{position:relative}.grow{flex:1 1 560px;min-width:260px}.suggestions{position:absolute;left:0;right:0;top:calc(100% + 8px);z-index:10;background:#fff;border:1px solid var(--line);border-radius:18px;overflow:hidden;box-shadow:0 18px 36px rgba(54,38,22,.16)}.sg{padding:10px 12px;border-top:1px solid rgba(111,98,85,.08)}.sg:first-child{border-top:0}.sg h3{font-size:.78rem;text-transform:uppercase;letter-spacing:.08em;color:var(--muted);margin-bottom:6px}.si{width:100%;display:flex;justify-content:space-between;align-items:center;background:transparent;border:0;border-radius:12px;padding:10px 12px;text-align:left}.si:hover,.si.active{background:rgba(11,110,79,.08)}
-    .filter-grid{display:grid;gap:12px}.results{display:grid;gap:14px}.card{padding:18px}.notice{padding:16px}.meta,.actions{margin-top:12px}.result-title{display:flex;justify-content:space-between;gap:12px;align-items:flex-start}.hint{color:#0b6e4f;font-weight:600}.facets{display:flex;gap:8px;flex-wrap:wrap}
+    .search-shell{position:relative}.grow{flex:1 1 560px;min-width:260px}.suggestions{position:absolute;left:0;right:0;top:calc(100% + 8px);z-index:10;background:#fff;border:1px solid var(--line);border-radius:8px;overflow:hidden;box-shadow:0 18px 36px rgba(54,38,22,.16)}.sg{padding:10px 12px;border-top:1px solid rgba(111,98,85,.08)}.sg:first-child{border-top:0}.sg h3{font-size:.78rem;text-transform:uppercase;letter-spacing:.08em;color:var(--muted);margin-bottom:6px}.si{width:100%;display:flex;justify-content:space-between;align-items:center;background:transparent;border:0;border-radius:8px;padding:10px 12px;text-align:left}.si:hover,.si.active{background:rgba(11,110,79,.08)}
+    .filter-grid{display:grid;gap:12px}.results{display:grid;gap:14px}.card{padding:18px}.notice{padding:16px}.meta,.actions{margin-top:12px}.result-title{display:flex;justify-content:space-between;gap:12px;align-items:flex-start}.hint{color:#0b6e4f;font-weight:600}.score{color:var(--accent2);font-weight:700}.reasons{margin:12px 0 0;padding-left:18px;color:var(--muted)}.reasons li{margin:4px 0}.facets{display:flex;gap:8px;flex-wrap:wrap}
     .modal{position:fixed;inset:0;background:rgba(31,22,16,.36);display:flex;align-items:center;justify-content:center;padding:20px}.modal.hidden{display:none}.modal-box{width:min(620px,100%);padding:22px}.link-btn{padding:0;background:transparent;border:0;color:var(--accent);min-height:auto}
     @media (max-width:960px){.layout{display:grid}.sidebar{width:auto}}
   </style>
@@ -23,8 +23,8 @@
     <section class="panel">
       <div class="head">
         <div>
-          <h1>Find the right course for every learning goal</h1>
-          <p class="subtle mt">Search courses, topics, skills, or instructors across Aastrika’s healthcare learning catalog.</p>
+          <h1>Aastrika course match engine</h1>
+          <p class="subtle mt">Find the most probable course using Aastrika PRISM Rank, with scores and reasons visible for every result.</p>
         </div>
         <span id="voiceState" class="chip good">Voice ready</span>
       </div>
@@ -110,7 +110,7 @@
 
   <script>
     const $ = (id) => document.getElementById(id);
-    const state = { groups: [], active: -1, timer: null, aborter: null, recorder: null, stream: null, chunks: [], lastResults: [] };
+    const state = { groups: [], active: -1, timer: null, aborter: null, recorder: null, recognition: null, stream: null, chunks: [], lastResults: [] };
     const params = new URLSearchParams(window.location.search);
     const esc = (v) => String(v ?? "").replaceAll("&","&amp;").replaceAll("<","&lt;").replaceAll(">","&gt;").replaceAll('"',"&quot;").replaceAll("'","&#39;");
     const filters = () => ({ preferred_language: $("language").value || null, filters: { difficulty: $("difficulty").value || null, category: $("category").value || null, duration_max: $("duration").value ? Number($("duration").value) : null }, sort: $("sort").value });
@@ -190,7 +190,7 @@
       const results = payload.results || [];
       state.lastResults = results;
       renderFilterChips();
-      $("summary").textContent = 'Showing ' + results.length + ' result(s) for "' + payload.original_query + '"';
+      $("summary").textContent = payload.original_query ? 'Showing ' + results.length + ' result(s) for "' + payload.original_query + '"' : 'Showing all ' + (payload.pagination?.total_results || results.length) + ' course(s)';
       const msg = [];
       if (payload.corrected_query) msg.push("Showing results for <strong>" + esc(payload.corrected_query) + "</strong>.");
       else if (payload.did_you_mean) msg.push('Did you mean <strong>' + esc(payload.did_you_mean) + "</strong>?");
@@ -211,7 +211,8 @@
       }
       $("results").innerHTML = results.map((r, i) => {
         const hint = r.difficulty === "beginner" ? "Beginner friendly" : r.language ? "Available in " + r.language : "Matches your search";
-        return '<article class="card"><div class="result-title"><div><h3>' + esc(r.title) + '</h3><p class="subtle mt">' + esc(r.description) + '</p></div><span class="hint">' + esc(hint) + '</span></div><div class="meta"><span class="tag">' + esc(r.instructor) + '</span><span class="tag">' + esc(r.language) + '</span><span class="tag">' + esc(r.category) + '</span><span class="tag">' + esc(r.topic) + '</span>' + (r.duration_minutes ? '<span class="tag">' + esc(r.duration_minutes) + ' min</span>' : "") + '</div><div class="actions"><button class="secondary viewBtn" type="button" data-index="' + i + '">View details</button></div></article>';
+        const reasons = (r.explanations || []).slice(0, 4).map((x) => '<li>' + esc(x) + '</li>').join("");
+        return '<article class="card"><div class="result-title"><div><h3>' + esc(r.title) + '</h3><p class="subtle mt">' + esc(r.description) + '</p></div><div><div class="score">' + Math.round((r.confidence || 0) * 100) + '%</div><span class="hint">' + esc(hint) + '</span></div></div>' + (reasons ? '<ul class="reasons">' + reasons + '</ul>' : '') + '<div class="meta"><span class="tag">' + esc(r.instructor) + '</span><span class="tag">' + esc(r.language) + '</span><span class="tag">' + esc(r.category) + '</span><span class="tag">' + esc(r.topic) + '</span>' + (r.duration_minutes ? '<span class="tag">' + esc(r.duration_minutes) + ' min</span>' : "") + '</div><div class="actions"><button class="secondary viewBtn" type="button" data-index="' + i + '">View details</button></div></article>';
       }).join("");
       $("results").querySelectorAll(".viewBtn").forEach((b) => b.addEventListener("click", () => openModal(state.lastResults[Number(b.dataset.index)])));
       renderFacets(payload.facets || {});
@@ -220,13 +221,13 @@
     async function runSearch() {
       hideSuggestions();
       const query = $("query").value.trim();
-      if (!query) return $("summary").textContent = "Enter a query to search.";
       const f = filters();
-      const body = { query, preferred_language: f.preferred_language, filters: f.filters, sort: f.sort };
-      $("summary").textContent = "Searching...";
+      const browsing = !query;
+      const body = { query, preferred_language: f.preferred_language, filters: f.filters, sort: f.sort, page_size: browsing ? 200 : 10 };
+      $("summary").textContent = browsing ? "Loading courses..." : "Searching...";
       setMessage("", false);
       try {
-        const res = await fetch("/api/v1/search", { method: "POST", headers: { "Content-Type": "application/json" }, body: JSON.stringify(body) });
+        const res = await fetch(browsing ? "/api/v1/search/browse" : "/api/v1/search", { method: "POST", headers: { "Content-Type": "application/json" }, body: JSON.stringify(body) });
         const payload = await res.json();
         if (!res.ok) { setMessage("Search could not be completed right now."); $("results").innerHTML = ""; return; }
         renderResults(payload);
@@ -264,6 +265,32 @@
     }
 
     async function startRecording() {
+      const SpeechRecognition = window.SpeechRecognition || window.webkitSpeechRecognition;
+      if (SpeechRecognition) {
+        const recognition = new SpeechRecognition();
+        const languageCodes = { English: "en-IN", Hindi: "hi-IN", Tamil: "ta-IN", Kannada: "kn-IN", Telugu: "te-IN" };
+        recognition.lang = languageCodes[$("language").value] || "en-IN";
+        recognition.interimResults = false;
+        recognition.maxAlternatives = 1;
+        recognition.onstart = () => { $("micBtn").textContent = "Stop"; $("voiceState").textContent = "Listening"; };
+        recognition.onresult = (event) => {
+          const transcript = event.results?.[0]?.[0]?.transcript?.trim();
+          if (transcript) {
+            $("query").value = transcript;
+            $("voiceState").textContent = "Searching";
+            runSearch();
+          }
+        };
+        recognition.onerror = () => { $("voiceState").textContent = "Voice unavailable"; };
+        recognition.onend = () => {
+          $("micBtn").textContent = "Voice";
+          if ($("voiceState").textContent === "Listening") $("voiceState").textContent = "Voice ready";
+          state.recognition = null;
+        };
+        state.recognition = recognition;
+        recognition.start();
+        return;
+      }
       if (!navigator.mediaDevices?.getUserMedia || typeof MediaRecorder === "undefined") { $("voiceState").textContent = "Microphone unavailable"; return; }
       try {
         state.stream = await navigator.mediaDevices.getUserMedia({ audio: true });
@@ -286,19 +313,23 @@
     $("query").addEventListener("input", () => { clearTimeout(state.timer); state.timer = setTimeout(fetchSuggestions, 180); });
     $("query").addEventListener("keydown", (e) => { if (e.key === "Enter") { e.preventDefault(); runSearch(); } });
     document.addEventListener("click", (e) => { if (!$("suggestions").contains(e.target) && e.target !== $("query")) hideSuggestions(); });
-    ["language","difficulty","category","duration","sort"].forEach((id) => $(id).addEventListener("change", renderFilterChips));
+    ["language","difficulty","category","duration","sort"].forEach((id) => $(id).addEventListener("change", () => { renderFilterChips(); if (!$("query").value.trim()) runSearch(); }));
     $("searchBtn").addEventListener("click", runSearch);
     $("clearFilters").addEventListener("click", () => { $("language").value = ""; $("difficulty").value = ""; $("category").value = ""; $("duration").value = ""; $("sort").value = "relevance"; renderFilterChips(); });
     $("uploadBtn").addEventListener("click", () => $("audioInput").click());
     $("audioInput").addEventListener("change", async () => { const file = $("audioInput").files?.[0]; if (file) await sendVoice(file, file.name, file.type || "audio/wav"); $("audioInput").value = ""; });
-    $("micBtn").addEventListener("click", () => state.recorder && state.recorder.state === "recording" ? state.recorder.stop() : startRecording());
+    $("micBtn").addEventListener("click", () => {
+      if (state.recognition) { state.recognition.stop(); return; }
+      if (state.recorder && state.recorder.state === "recording") { state.recorder.stop(); return; }
+      startRecording();
+    });
     $("closeModal").addEventListener("click", closeModal);
     $("modal").addEventListener("click", (e) => { if (e.target === $("modal")) closeModal(); });
     document.addEventListener("keydown", (e) => { if (e.key === "Escape" && !$("modal").classList.contains("hidden")) closeModal(); });
     document.querySelectorAll(".sample,.topicChip").forEach((b) => b.addEventListener("click", () => { $("query").value = b.dataset.query || ""; runSearch(); }));
     applyParamsFromUrl();
     renderFilterChips();
-    if (["1","true","yes"].includes(normalizeParam(params.get("autorun")))) runSearch();
+    runSearch();
   </script>
 </body>
 </html>

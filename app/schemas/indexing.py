@@ -20,6 +20,8 @@ class CourseDocumentPayload(BaseModel):
     language: str
     available_languages: list[str] = Field(default_factory=list)
     category: str
+    content_type: str | None = None
+    publication_status: str | None = None
     topic: str
     competency_name: str | None = None
     levels: list[str] = Field(default_factory=list)
@@ -30,6 +32,7 @@ class CourseDocumentPayload(BaseModel):
     popularity_score: float = 0.0
     recency_score: float = 0.0
     active: bool = True
+    searchable_metadata: list[str] = Field(default_factory=list)
     metadata: dict[str, Any] = Field(default_factory=dict)
 
 

@@ -1,0 +1,84 @@
+--- a/src/publicApi_v8/publicSearch.ts
++++ b/src/publicApi_v8/publicSearch.ts
+@@ -4,6 +4,7 @@
+ import { Pool } from 'pg'
+ import { CONSTANTS } from '../utils/env'
+ import { logError } from '../utils/logger'
++import { tryAdvancedSearch } from './advancedSearch'
+ 
+ export const publicSearch = Router()
+ 
+@@ -45,6 +46,16 @@
+   try {
+     const facetsDataDefault = ['duration', 'lastUpdatedOn']
+     const courseSearchRequestData = request.body
++    const advanced = await tryAdvancedSearch({
++      enabled: process.env.ADVANCED_SEARCH_ENABLED === 'true',
++      url: process.env.ADVANCED_SEARCH_URL || '',
++      timeout: Number(process.env.ADVANCED_SEARCH_TIMEOUT_MS || '3000'),
++      publicUrl: API_END_POINTS.search,
++      headers,
++      body: courseSearchRequestData,
++      http: axios,
++    })
++    if (advanced) return response.status(200).json(advanced)
+     const filters = courseSearchRequestData.request.filters
+     const facets = courseSearchRequestData.request.facets
+     const sortMethod = courseSearchRequestData.request.sort_by || {
+--- /dev/null
++++ b/src/publicApi_v8/advancedSearch.ts
+@@ -0,0 +1,54 @@
++// Upstream companion for src/publicApi_v8/publicSearch.ts. No runtime dependencies.
++type RecordData = { identifier: string; competency?: boolean; [key: string]: unknown }
++type HttpRequest = (options: object) => Promise<{ data: any }>
++type Options = {
++  enabled: boolean; url: string; timeout: number; publicUrl: string; headers: object;
++  body: any; http: HttpRequest;
++}
++
++export async function tryAdvancedSearch(options: Options): Promise<any | null> {
++  const { body, http } = options
++  const input = body && body.request
++  if (!options.enabled || !input || typeof input.query !== 'string' || !input.query.trim()) return null
++  // Unsupported UI filters retain the existing path rather than disappearing silently.
++  const filters = input.filters || {}
++  if (Object.keys(filters).some(key => !['primaryCategory', 'contentType', 'status',
++    'language', 'difficulty', 'topic', 'instructor', 'duration_max', 'certification'].includes(key))) return null
++  const limit = input.limit === undefined ? 10 : input.limit
++  const offset = input.offset === undefined ? 0 : input.offset
++  if (!Number.isInteger(limit) || limit < 1 || limit > 100 ||
++      !Number.isInteger(offset) || offset < 0 || offset > 1000000) return null
++  if (!options.url || !Number.isFinite(options.timeout) || options.timeout < 1 || options.timeout > 30000) return null
++  try {
++    const ranked = (await http({ method: 'post', url: options.url, timeout: options.timeout,
++      maxContentLength: 1048576, headers: options.headers,
++      data: { query: input.query, filters, limit, offset } })).data
++    if (!ranked || !Array.isArray(ranked.ids) || ranked.ids.length > limit ||
++        ranked.ids.some((id: unknown) => typeof id !== 'string' || !id) ||
++        new Set(ranked.ids).size !== ranked.ids.length || !Number.isInteger(ranked.total) ||
++        ranked.total < ranked.ids.length || ranked.total < 0) throw new Error('Invalid IDs response')
++    let records: RecordData[] = []
++    let facets = []
++    if (ranked.ids.length) {
++      const fetched = (await http({ method: 'post', url: options.publicUrl, timeout: options.timeout,
++        maxContentLength: 16777216, headers: options.headers,
++        data: { request: { filters: { primaryCategory: ['Course'], status: ['Live'], identifier: ranked.ids },
++          facets: input.facets, limit: ranked.ids.length, offset: 0 } } })).data
++      if (!fetched || fetched.responseCode !== 'OK' || !fetched.result ||
++          !Array.isArray(fetched.result.content)) throw new Error('Invalid record response')
++      records = fetched.result.content
++      facets = fetched.result.facets || []
++    }
++    const byId = new Map<string, RecordData>()
++    for (const record of records) {
++      if (record && typeof record.identifier === 'string' && !record.competency &&
++          !byId.has(record.identifier)) byId.set(record.identifier, record)
++    }
++    const content = ranked.ids.filter((id: string) => byId.has(id)).map((id: string) => byId.get(id))
++    // Missing fetched IDs are omitted without changing the matching-population total.
++    return { responseCode: 'OK', result: { content, count: ranked.total, facets }, status: 200 }
++  } catch {
++    // Caller continues directly into its original handler; never re-enter this function.
++    return null
++  }
++}

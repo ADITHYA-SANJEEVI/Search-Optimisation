@@ -8,6 +8,7 @@ from fastapi import FastAPI
 from fastapi.responses import FileResponse
 
 from app.api.health import router as health_router
+from app.api.advanced_search import router as advanced_search_router
 from app.api.index import router as index_router
 from app.api.search import router as search_router
 from app.core.config import settings
@@ -26,6 +27,7 @@ static_dir = Path(__file__).resolve().parent / "static"
 app.include_router(health_router, prefix=settings.api_prefix)
 app.include_router(index_router, prefix=settings.api_prefix)
 app.include_router(search_router, prefix=settings.api_prefix)
+app.include_router(advanced_search_router)
 
 
 @app.get("/")

@@ -23,6 +23,11 @@ def search(request: SearchRequest, container: ServiceContainer = Depends(get_con
     return container.search_service.search(request, route_type="search")
 
 
+@router.post("/search/browse", response_model=SearchResponse)
+def browse_courses(request: SearchRequest, container: ServiceContainer = Depends(get_container)) -> SearchResponse:
+    return container.search_service.browse(request)
+
+
 @router.get("/suggest", response_model=list[SuggestionGroup])
 def suggest(
     q: str = Query(..., min_length=1),
